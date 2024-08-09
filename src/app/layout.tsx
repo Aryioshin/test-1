@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import TopBar from "@/components/layout/TopBar";
+import Decor from "@/components/layout/Decor";
 import '@rainbow-me/rainbowkit/styles.css'
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,9 +16,10 @@ export const metadata: Metadata = {
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body>
+      <body className="relative">
         <Providers>
           <TopBar />
+          <Decor/>
           {children}
         </Providers>
       </body>

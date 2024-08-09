@@ -20,6 +20,7 @@ const config: Config = {
         "primary-blue-100": "#03001D",
         "primary-blue-200": "#0D0C4D",
         "primary-blue-300": "#0204FD",
+        "primary-gray-50": "#808080",
         "primary-gray-100": "#1E2A44",
         "primary-gray-200": "#141823",
         "primary-gray-300": "#0E1119",
