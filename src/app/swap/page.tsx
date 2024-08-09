@@ -1,6 +1,5 @@
 
 import SwapSide from "@/components/swap/SwapSide"
-import { YourApp } from "@/components/button"
 import { ArrowUpDown, Wallet2 } from "lucide-react"
 
 export default function Page() {
