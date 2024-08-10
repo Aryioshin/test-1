@@ -1,12 +1,14 @@
 'use client'
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useSwitchChain, useChainId } from 'wagmi';
+import { useSwitchChain, useChainId, } from 'wagmi';
+import { base, cronos, cronosTestnet, mainnet } from 'viem/chains';
+import { addNewChain } from '@/config/actions';
+import { cronosConfig } from '@/config';
 
 export default function ConnectWalletButton() {
-  const chain = useSwitchChain({})
-  const chainID = useChainId();
-  console.log( "chainId ===========>", chainID)
+  const { chains, switchChain, error } = useSwitchChain();
+
   return (
     <ConnectButton.Custom>
       {({
@@ -28,6 +30,21 @@ export default function ConnectWalletButton() {
           (!authenticationStatus ||
             authenticationStatus === 'authenticated');
 
+        const chainId = useChainId();
+        const switchChainHandle = async () => {
+          if (!isExistChain(cronos.id)) {
+            console.log("Adding start")
+            const res:boolean = await addNewChain(cronosConfig);
+            // if(res) switchChain({chainId:base.id})
+          }
+        }
+
+        const isExistChain = (chainId: number) => {
+          const isExist = chains.find((item: any) => item.id == chainId);
+          if (isExist) return true
+          else return false
+        }
+
         return (
           <div
             {...(!ready && {
@@ -47,6 +64,15 @@ export default function ConnectWalletButton() {
                     Connect Wallet
                   </button>
                 );
+              }
+
+              if (chainId != cronos.id && chainId != cronosTestnet.id) {
+                return (
+                  <button onClick={switchChainHandle} type="button"
+                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'>
+                    Switch Chain
+                  </button>
+                )
               }
 
               if (chain.unsupported) {
