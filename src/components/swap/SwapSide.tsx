@@ -3,9 +3,10 @@
 import { useState } from "react"
 import TokenSelect from "./TokenSelect";
 
-export default function SwapSide({ className = "", disabled = false }: { className?: string, disabled?: boolean }) {
+export default function SwapSide({ className = "", disabled = false, coin = null, setCoin }: { className?: string, disabled?: boolean, coin?: number | any, setCoin?:(value : any)=> void }) {
   const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState("");
+  const selectedCoin = coin;
 
   const handleBalanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -23,10 +24,10 @@ export default function SwapSide({ className = "", disabled = false }: { classNa
           }}>MAX</button>
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <TokenSelect />
-        <div className="flex items-center w-[calc(100%-122px)]">
-          <input className="bg-transparent w-full text-right border focus:outline-0 pl-2 text-2xl text-white border-white/30 focus:bg-green-600 px-3 h-12 z-20" value={amount} disabled={disabled} onChange={handleBalanceChange}></input>
+      <div className="flex items-center justify-between gap-3">
+        <TokenSelect coin={coin} setCoin={setCoin}/>
+        <div className="flex items-center w-2/3">
+          <input className="bg-transparent w-full text-right focus:outline-0 pr-2 text-2xl text-white focus:bg-green-600 px-3 h-12 z-20" value={amount} disabled={disabled} onChange={handleBalanceChange}></input>
         </div>
       </div>
       <div className="flex justify-end w-1/2 h-full absolute right-0 top-0">

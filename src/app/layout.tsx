@@ -5,9 +5,6 @@ import { Providers } from "./providers";
 import TopBar from "@/components/layout/TopBar";
 // import Decor from "@/components/layout/Decor";
 import '@rainbow-me/rainbowkit/styles.css'
-import dynamic from 'next/dynamic'
-
-const DecorDynamic = dynamic(() => import ('@/components/layout/Decor'), {ssr: false})
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +19,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       <body className="relative">
         <Providers>
           <TopBar />
-          <DecorDynamic/>
           {children}
         </Providers>
       </body>

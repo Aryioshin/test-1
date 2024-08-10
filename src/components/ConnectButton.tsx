@@ -1,8 +1,12 @@
 'use client'
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useSwitchChain, useChainId } from 'wagmi';
 
 export default function ConnectWalletButton() {
+  const chain = useSwitchChain({})
+  const chainID = useChainId();
+  console.log( "chainId ===========>", chainID)
   return (
     <ConnectButton.Custom>
       {({
@@ -38,7 +42,8 @@ export default function ConnectWalletButton() {
             {(() => {
               if (!connected) {
                 return (
-                  <button onClick={openConnectModal} type="button">
+                  <button onClick={openConnectModal} type="button"
+                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'>
                     Connect Wallet
                   </button>
                 );
@@ -46,7 +51,8 @@ export default function ConnectWalletButton() {
 
               if (chain.unsupported) {
                 return (
-                  <button onClick={openChainModal} type="button">
+                  <button onClick={openChainModal} type="button"
+                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'>
                     Wrong network
                   </button>
                 );
