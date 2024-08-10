@@ -27,9 +27,9 @@ export default function TokenSelect() {
   };
 
   return (
-    <div className="relative" ref={newRef}>
+    <div className="relative w-[110px] h-12" ref={newRef}>
       <button
-        className="flex justify-between w-[110px] items-center gap-2 border rounded-3xl py-1 px-3 hover:shadow-2xl shadow-blue-400"
+        className="flex justify-between h-full items-center gap-2 border border-black text-white bg-green-950 py-1 px-3 hover:shadow-2xl shadow-blue-400"
         onClick={toggleSelect}
       >
         Select Token

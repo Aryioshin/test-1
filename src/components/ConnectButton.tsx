@@ -55,38 +55,11 @@ export default function ConnectWalletButton() {
               return (
                 <div style={{ display: 'flex', gap: 12 }}>
                   <button
-                    onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
+                    onClick={() => { console.log("confime!") }}
                     type="button"
+                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'
                   >
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: 12,
-                          height: 12,
-                          borderRadius: 999,
-                          overflow: 'hidden',
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? 'Chain icon'}
-                            src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
-                  </button>
-
-                  <button onClick={openAccountModal} type="button">
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ''}
+                    Confirm
                   </button>
                 </div>
               );

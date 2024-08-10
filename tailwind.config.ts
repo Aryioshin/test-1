@@ -15,6 +15,9 @@ const config: Config = {
       },
       boxShadow: {
         '3xl': '0 0 200px 0px rgba(0, 0, 0, 0.1)',
+        box: '5px 5px 0 #222',
+        "3s": '3px 3px 0 #222',
+        "2s": '2px 2px 0 #222'
       },
       colors:{
         "primary-blue-100": "#03001D",
