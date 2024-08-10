@@ -55,7 +55,7 @@ export default function ConnectWalletButton() {
               return (
                 <div style={{ display: 'flex', gap: 12 }}>
                   <button
-                    onClick={() => { console.log("confime!") }}
+                    onClick={() => { console.log("confirm!") }}
                     type="button"
                     className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'
                   >

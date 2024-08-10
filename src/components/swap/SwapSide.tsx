@@ -26,7 +26,7 @@ export default function SwapSide({ className = "", disabled = false }: { classNa
       <div className="flex items-center gap-3">
         <TokenSelect />
         <div className="flex items-center w-[calc(100%-122px)]">
-          <input className="bg-transparent w-full text-right border focus:outline-0 pl-2 text-2xl text-white border-white/30 focus:bg-green-600 px-3 h-12" value={amount} disabled={disabled} onChange={handleBalanceChange}></input>
+          <input className="bg-transparent w-full text-right border focus:outline-0 pl-2 text-2xl text-white border-white/30 focus:bg-green-600 px-3 h-12 z-20" value={amount} disabled={disabled} onChange={handleBalanceChange}></input>
         </div>
       </div>
       <div className="flex justify-end w-1/2 h-full absolute right-0 top-0">
