@@ -8,6 +8,7 @@ import { cronosConfig } from '@/config';
 
 export default function ConnectWalletButton() {
   const { chains, switchChain, error } = useSwitchChain();
+  const chainId = useChainId();
 
   return (
     <ConnectButton.Custom>
@@ -30,7 +31,6 @@ export default function ConnectWalletButton() {
           (!authenticationStatus ||
             authenticationStatus === 'authenticated');
 
-        const chainId = useChainId();
         const switchChainHandle = async () => {
           if (!isExistChain(cronos.id)) {
             console.log("Adding start")

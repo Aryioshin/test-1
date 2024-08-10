@@ -1,10 +1,19 @@
+
+
 export const addNewChain = async (newChain: any): Promise<boolean> => {
   if (window.ethereum) {
-    console.log(window.ethereum)
+    console.log("newChain => ", newChain)
+    const formattedChain = {
+      ...newChain,
+      chainId: `0x${Number(newChain.chainId).toString(16)}`, // Convert to hex
+    };
+
+    console.log("Formatted Chain => ", formattedChain);
+
     try {
       const res = await window.ethereum.request({
         "method": 'wallet_addEthereumChain',
-        "params": [newChain],
+        "params": [formattedChain],
       });
       return true
     } catch (error) {
