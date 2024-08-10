@@ -5,8 +5,8 @@ import ConnectButton from "@/components/ConnectButton"
 
 export default function Page() {
   return (
-    <div className="flex justify-center items-center w-full h-[100vh] text-blue-400">
-      <div className="relative w-[450px] h-[340px] shadow-3xl shadow-primary-blue-300 rounded-3xl bg-primary-gray-200 p-3">
+    <div className="flex justify-center items-center w-full h-[100vh] text-white">
+      <div className="relative w-[450px] h-[340px] shadow-3xl shadow-primary-blue-300 rounded-3xl bg-primary-gray-200/0 p-3">
         <div className="flex justify-between gap-2 px-4">
           <div className="rounded flex justify-center items-center text-2xl font-bold hover:cursor-pointer">
             SWAP
