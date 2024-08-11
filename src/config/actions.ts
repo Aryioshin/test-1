@@ -1,40 +1,21 @@
 
+import {readContract, writeContract} from 'wagmi/actions';
+import { config } from './wagmi';
+import { Address } from 'viem';
+import { Abis } from '@/utils';
+import { TOKEN_LIST } from '.';
+import { currentChain } from '@/config'
 
-export const addNewChain = async (newChain: any): Promise<boolean> => {
-  if (window.ethereum) {
-    console.log("newChain => ", newChain)
-    const formattedChain = {
-      ...newChain,
-      chainId: `0x${Number(newChain.chainId).toString(16)}`, // Convert to hex
-    };
-
-    console.log("Formatted Chain => ", formattedChain);
-
-    try {
-      const res = await window.ethereum.request({
-        "method": 'wallet_addEthereumChain',
-        "params": [formattedChain],
-      });
-      return true
-    } catch (error) {
-      console.error('Failed to add Cronos chain:', error);
-      return false
-    }
-  } else {
-    console.error('MetaMask is not installed');
-    return false
-  }
-};
-
-export const reqeuestPermissions = async () => {
-  const res = await window.ethereum.request({
-    method: "wallet_requestPermissions",
-    params: [
-      {
-        "eth_accounts": {}
-      }
-    ]
-  });
-  if (res) return res;
-  else return null
+export const swapWithNative = async (tokenId: number, amount:number, address:Address | undefined) => {
+  const token : any = TOKEN_LIST[tokenId]
+  const abi = Abis[token.name];
+  const res = await writeContract(config, {
+    abi,
+    chainId: currentChain.id, // Make sure this is the correct chain ID for your case
+    address: token.address as Address,
+    functionName: 'deposit',
+    args: [address as Address, amount],
+    account: address as Address
+  })
+  console.log(res)
 }

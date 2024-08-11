@@ -3,10 +3,11 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useSwitchChain, useChainId, } from 'wagmi';
 import { base, cronos, cronosTestnet, mainnet } from 'viem/chains';
-import { addNewChain } from '@/config/actions';
 import { cronosConfig } from '@/config';
+import { swapWithNative } from '@/config/actions';
+import Image from 'next/image';
 
-export default function ConnectWalletButton() {
+export default function ConnectWalletButton({ swap } : any) {
   const { chains, switchChain, error } = useSwitchChain();
   const chainId = useChainId();
 
@@ -32,17 +33,7 @@ export default function ConnectWalletButton() {
             authenticationStatus === 'authenticated');
 
         const switchChainHandle = async () => {
-          if (!isExistChain(cronos.id)) {
-            console.log("Adding start")
-            const res:boolean = await addNewChain(cronosConfig);
-            // if(res) switchChain({chainId:base.id})
-          }
-        }
-
-        const isExistChain = (chainId: number) => {
-          const isExist = chains.find((item: any) => item.id == chainId);
-          if (isExist) return true
-          else return false
+          switchChain({ chainId: cronos.id })
         }
 
         return (
@@ -60,25 +51,28 @@ export default function ConnectWalletButton() {
               if (!connected) {
                 return (
                   <button onClick={openConnectModal} type="button"
-                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'>
-                    Connect Wallet
+                    className='flex justify-center items-center gap-4 w-full py-3 bg-green-600 text-xl rounded-xl hover:shadow-button text-blue-200 hover:shadow-blue-400 hover:text-blue-400'>
+                    <div className='relative w-12 h-12'>
+                      <Image src="/wallet.png" fill alt="" />
+                    </div>
+                    Connet wallet
                   </button>
                 );
               }
 
-              if (chainId != cronos.id && chainId != cronosTestnet.id) {
-                return (
-                  <button onClick={switchChainHandle} type="button"
-                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'>
-                    Switch Chain
-                  </button>
-                )
-              }
+              // if (chainId != cronos.id && chainId != cronosTestnet.id) {
+              //   return (
+              //     <button onClick={switchChainHandle} type="button"
+              //       className='w-full py-3 bg-green-600 text-xl rounded-xl hover:shadow-button hover:shadow-blue-400 hover:text-blue-400 text-orange-700 uppercase tracking-widest'>
+              //       Switch Chain
+              //     </button>
+              //   )
+              // }
 
               if (chain.unsupported) {
                 return (
                   <button onClick={openChainModal} type="button"
-                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'>
+                    className='w-full py-3 bg-green-600 text-xl rounded-xl hover:shadow-button hover:shadow-blue-400 hover:text-blue-400 text-orange-700 uppercase tracking-widest'>
                     Wrong network
                   </button>
                 );
@@ -87,11 +81,13 @@ export default function ConnectWalletButton() {
               return (
                 <div style={{ display: 'flex', gap: 12 }}>
                   <button
-                    onClick={() => { console.log("confirm!") }}
+                    onClick={swap}
                     type="button"
-                    className='w-full py-3 bg-green-600 text-xl text-black font-bold uppercase tracking-widest shadow-2s'
+                    className='flex justify-center items-center w-full py-3 bg-green-600 rounded-xl hover:shadow-button hover:shadow-blue-400 tracking-widest'
                   >
-                    Confirm
+                    <div className='relative w-12 h-12'>
+                      <Image src="/check.png" fill alt="" />
+                    </div>
                   </button>
                 </div>
               );
