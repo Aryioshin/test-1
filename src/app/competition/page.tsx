@@ -14,8 +14,8 @@ export default function Page() {
       const res: any = await getVolumes();
       if(res) setUserVolume(res);
     }
-    // load();
-    setUserVolume(volumeSort(list));
+    load();
+    // setUserVolume(volumeSort(list));
   }, [])
   return (
     <div className="flex justify-center items-center w-full h-[100vh] text-green-200">
