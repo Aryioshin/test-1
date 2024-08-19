@@ -11,7 +11,7 @@ export default function Page() {
   const [userVolume, setUserVolume] = useState<Array<IVolume>>([]);
   useEffect(() => {
     const load = async() => {
-      const res: any = await getVolumes();
+      const res: any | never = await getVolumes();
       if(res) setUserVolume(res);
     }
     load();
@@ -33,11 +33,3 @@ export default function Page() {
     </div>
   )
 }
-
-export const list: any = [
-  { user: "CYwdd8WnXCHrgyxQVnRcTPtyzLQoXAcgtXdYLnUtUQco", volume: "347554568674567445674452345567567" },
-  { user: "HDKXtYrMrSxZ9rXrSYnVX52AWVvtsojNauCfxcooMdJb", volume: "2344567456745674567423453567455" },
-  { user: "CqA42zXaf5zXk7EW7jtCLfL2uH1efuB9GtTfjfJ2hzoq", volume: "45553456345456744567456" },
-  { user: "ESKAnQfbdU8THQhbXXmzJyQWCVfHVCWZBYjA2RjxSG8v", volume: "23423345234544123423423354567734" },
-  { user: "4rhfPZRBcZkoSzStSCFLo6KmLiX2eBAMigZh2bBLPYMw", volume: "2346234623464567456234523474567234" },
-]

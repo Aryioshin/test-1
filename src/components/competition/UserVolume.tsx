@@ -1,5 +1,5 @@
 import { convertBignitToString } from "@/utils/actions"
-import CopyButton from "../copyBotton"
+import CopyButton from "@/components/CopyBotton"
 
 
 
