@@ -8,6 +8,7 @@ import '@rainbow-me/rainbowkit/styles.css'
 import dynamic from 'next/dynamic'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AppProvider } from "@/context/AppContext";
 
 const TopBarDynamic = dynamic(() => import('@/components/layout/TopBar'), { ssr: false })
 
@@ -23,17 +24,19 @@ function RootLayout({ children }: { children: React.ReactNode }) {
     <html lang="en" className="dark">
       <body className="relative">
         <Providers>
-          <TopBarDynamic />
-          {children}
-          <ToastContainer
-            position="bottom-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            rtl={false}
-            draggable
-            theme="dark"
-          />
+          <AppProvider>
+            <TopBarDynamic />
+            {children}
+            <ToastContainer
+              position="bottom-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              rtl={false}
+              draggable
+              theme="dark"
+            />
+          </AppProvider>
         </Providers>
       </body>
     </html>

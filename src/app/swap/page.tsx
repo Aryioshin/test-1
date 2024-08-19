@@ -11,6 +11,7 @@ import { toast } from "react-toastify"
 import { swapTokens, getQuote, getVolumes } from "@/utils/actions"
 import { Address } from "viem"
 import { useRouter } from "next/navigation"
+import { useAppContext } from "@/context/AppContext"
 
 export default function Page() {
   const [baseToken, setBaseToken] = useState(0);
@@ -21,6 +22,7 @@ export default function Page() {
   const { address } = useAccount();
   const router = useRouter();
   const config = useConfig();
+  const { setIsQuateLoading } = useAppContext();
 
   const changeQuote = async () => {
     const res = await getQuote(config, baseToken, baseAmount, quoteToken);
@@ -28,8 +30,16 @@ export default function Page() {
   }
 
   useEffect(() => {
+    const load = async () => {
+      setIsQuateLoading(true);
+      await changeQuote();
+
+      setTimeout(() => {
+        setIsQuateLoading(false);
+      }, 1000)
+    }
     if (baseToken == quoteToken) return;
-    changeQuote();
+    load();
   }, [config, baseToken, quoteToken, baseAmount]);
 
   const clear = () => {
@@ -54,7 +64,7 @@ export default function Page() {
       <div className={`bg-gray-50/70 fixed w-full h-full z-50 ${isSwapping ? "block" : "hidden"}`}>
         <div className="flex justify-center items-center w-full h-full">
           <div className="relative aspect-square w-[100px]">
-            <Image src="/loading.gif" fill alt=""/>
+            <Image src="/loading.gif" fill alt="" />
           </div>
         </div>
       </div>
@@ -63,7 +73,7 @@ export default function Page() {
           <div className="rounded flex justify-center items-center text-3xl font-bold hover:cursor-pointer text-green-200">
             SWAP
           </div>
-          <div onClick={()=>{router.push("/competition")}} className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">
+          <div onClick={() => { router.push("/competition") }} className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">
             BATTLE
           </div>
           <div className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">

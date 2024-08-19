@@ -40,17 +40,18 @@ export const getQuote = async (config: Config, baseToken: number, baseAmount: nu
   let token2 = quote.isNative ? WCRO : quote;
   try {
     const abi = VVS2_ABI;
-    let res: any;
+    let path: any;
     if (token1.name == "WCRO" || token2.name == "WCRO") {
-      res = await getQuoteOfPair(config, amount, token1, token2);
+      path = [token1.address as Address, token2.address as Address];
     } else {
-      res = await readContract(config, {
-        abi, address: VVS2Router as Address,
-        functionName: "getAmountsOut",
-        args: [amount, [token1.address as Address, WCRO.address as Address, token2.address as Address]]
-      });
-      res = res[2];
+      path = [token1.address as Address, WCRO.address as Address, token2.address as Address];
     }
+    let res: any = await readContract(config, {
+      abi, address: VVS2Router as Address,
+      functionName: "getAmountsOut",
+      args: [amount, path]
+    });
+    res = res[res.length - 1]
     console.log(amount, res)
     return parseFloat((Number(res) / (10 ** token2.decimal) * (100 - fee) / 100).toString())
 
@@ -348,39 +349,5 @@ export const clearVolume = async () => {
   } catch (error) {
     toast.error("Transaction failed");
     return false;
-  }
-}
-
-export const getQuoteOfPair = async (config: Config, amount: number, token1: IToken, token2: IToken) => {
-  const token1Address: Address = token1.address as Address;
-  const token2Address: Address = token2.address as Address;
-
-  try {
-    const pairAddress: any = await readContract(config, {
-      abi: FACTORY_ABI,
-      functionName: "getPair",
-      address: FACTORY,
-      args: [token1Address, token2Address],
-    });
-
-    const reserves: any = await readContract(config, {
-      abi: PAIR_ABI,
-      functionName: "getReserves",
-      address: pairAddress as Address,
-      args: []
-    });
-
-    const amountOut: any = await readContract(config, {
-      abi: VVS2_ABI,
-      address: VVS2Router as Address,
-      functionName: "getAmountOut",
-      args: [amount, reserves[0], reserves[1]]
-    });
-
-    console.log(amountOut);
-    return amountOut;
-  } catch (error) {
-    console.log(error);
-    return 0;
   }
 }

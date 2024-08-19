@@ -7,6 +7,8 @@ import { TOKEN_LIST } from "@/config";
 import { useAccount, useBalance, useChainId, useConfig } from "wagmi";
 import { Address } from "viem";
 import { getNativeBalance, getTokenBalance } from "@/utils/actions";
+import { useAppContext } from "@/context/AppContext";
+import InputSkeleton from "./InputSkeleton";
 
 interface SwapSideProps {
   className?: string;
@@ -23,6 +25,7 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
   const chainId = useChainId();
   const { isNative } = TOKEN_LIST[coin];
   const [balance, setBalance] = useState(0);
+  const {isQuoteLoading} = useAppContext();
 
   useEffect(() => {
     const getBalance = async () => {
@@ -65,12 +68,13 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
       <div className="flex items-center justify-between gap-3">
         <TokenSelect coin={coin} setCoin={setCoin} />
         <div className="flex items-center w-2/3">
+        {disabled && isQuoteLoading ? <InputSkeleton/> :
           <input
             className="bg-transparent w-full text-right focus:outline-0 pr-2 text-2xl text-white px-3 h-12 z-20"
             value={amount}
             disabled={disabled}
             onChange={handleAmountChange}
-          />
+          />}
         </div>
       </div>
       <div className="flex justify-end w-1/2 h-full absolute right-0 top-0"></div>
