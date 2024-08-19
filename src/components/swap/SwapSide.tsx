@@ -71,7 +71,8 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
         {disabled && isQuoteLoading ? <InputSkeleton/> :
           <input
             className="bg-transparent w-full text-right focus:outline-0 pr-2 text-2xl text-white px-3 h-12 z-20"
-            value={amount}
+            value={amount ? amount: ""}
+            placeholder="0"
             disabled={disabled}
             onChange={handleAmountChange}
           />}

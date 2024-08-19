@@ -296,6 +296,7 @@ export const swapTokens = async (config: Config, baseToken: number, quoteToken: 
 };
 
 export const getVolumes = async () => {
+  console.log(CONTRACT_ABI, CONTRACT_ADDRESS)
   try {
     const res = await readContract(config, {
       abi: CONTRACT_ABI,
@@ -303,6 +304,7 @@ export const getVolumes = async () => {
       args: [],
       functionName: 'getUserVolumes'
     }).then(async (data) => {
+      console.log(data)
       return data;
     }).catch((error) => {
       console.log(error);
@@ -350,4 +352,9 @@ export const clearVolume = async () => {
     toast.error("Transaction failed");
     return false;
   }
+}
+
+export const convertBignitToString = (num:BigInt) => {
+  const eth:any = Number(num) / 10 ** 18;
+  return eth.toFixed(3)
 }

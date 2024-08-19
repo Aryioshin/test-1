@@ -18,7 +18,6 @@ export default function CopyButton({ value }: any) {
   };
   return !copied ? (
     <Copy
-      size={15}
       onClick={() => {
         copyContent(value);
       }}
