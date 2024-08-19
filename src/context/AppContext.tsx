@@ -5,7 +5,9 @@ import { useContext, createContext, ReactNode, useState, Dispatch, SetStateActio
 // Define the interface for the context value
 interface AppContextType {
   isQuoteLoading: boolean;
+  isAbleSwap: boolean;
   setIsQuateLoading: Dispatch<SetStateAction<boolean>>;
+  setIsAbleSwap: Dispatch<SetStateAction<boolean>>;
 }
 
 // Create the context with a default value (can be `undefined`)
@@ -18,9 +20,10 @@ interface AppProviderProps {
 export const AppProvider = ({ children }: AppProviderProps) => {
   // Define the value that will be provided to all consumers of this context
   const [isQuoteLoading, setIsQuateLoading] = useState(false);
+  const [isAbleSwap, setIsAbleSwap] = useState(false);
 
   return (
-    <AppContext.Provider value={{ isQuoteLoading, setIsQuateLoading }}>
+    <AppContext.Provider value={{ isQuoteLoading, isAbleSwap, setIsQuateLoading, setIsAbleSwap }}>
       {children}
     </AppContext.Provider>
   );

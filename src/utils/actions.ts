@@ -297,26 +297,20 @@ export const swapTokens = async (config: Config, baseToken: number, quoteToken: 
 
 export const getVolumes = async () => {
   console.log(CONTRACT_ABI, CONTRACT_ADDRESS)
-  try {
-    const res = await readContract(config, {
-      abi: CONTRACT_ABI,
-      address: CONTRACT_ADDRESS,
-      args: [],
-      functionName: 'getUserVolumes'
-    }).then(async (data) => {
-      console.log(data)
-      return data;
-    }).catch((error) => {
-      console.log(error);
-      toast.error("Fetch failed");
-      return null
-    })
-    console.log(res)
-    return res;
-  } catch (error) {
-    toast.error("Fetch failed");
-    return null;
-  }
+  const res = await readContract(config, {
+    abi: CONTRACT_ABI,
+    address: CONTRACT_ADDRESS,
+    args: [],
+    functionName: 'getUserVolumes'
+  }).then(async (data) => {
+    console.log(data)
+    return data;
+  }).catch((error) => {
+    console.log(error);
+    return null
+  })
+  console.log(res)
+  return res;
 }
 
 export const volumeSort = (volumeList: Array<any>) => {
@@ -354,7 +348,11 @@ export const clearVolume = async () => {
   }
 }
 
-export const convertBignitToString = (num:BigInt) => {
-  const eth:any = Number(num) / 10 ** 18;
+export const convertBignitToString = (num: BigInt) => {
+  const eth: any = Number(num) / 10 ** 18;
+  const head = eth.toString().split(".")[0];
+  if(head.length > 9) return head.slice(0, head.length - 9) + "B";
+  if(head.length > 6) return head.slice(0, head.length - 6) + "M";
+  if(head.length > 3) return head.slice(0, head.length - 3) + "K";
   return eth.toFixed(3)
 }

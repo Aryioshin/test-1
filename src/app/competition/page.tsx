@@ -14,8 +14,8 @@ export default function Page() {
       const res: any = await getVolumes();
       if(res) setUserVolume(res);
     }
-    load();
-    // setUserVolume(volumeSort(list));
+    // load();
+    setUserVolume(volumeSort(list));
   }, [])
   return (
     <div className="flex justify-center items-center w-full h-[100vh] text-green-200">
@@ -37,7 +37,7 @@ export default function Page() {
 export const list: any = [
   { user: "CYwdd8WnXCHrgyxQVnRcTPtyzLQoXAcgtXdYLnUtUQco", volume: "347554568674567445674452345567567" },
   { user: "HDKXtYrMrSxZ9rXrSYnVX52AWVvtsojNauCfxcooMdJb", volume: "2344567456745674567423453567455" },
-  { user: "CqA42zXaf5zXk7EW7jtCLfL2uH1efuB9GtTfjfJ2hzoq", volume: "455534563454567445674567456735" },
+  { user: "CqA42zXaf5zXk7EW7jtCLfL2uH1efuB9GtTfjfJ2hzoq", volume: "45553456345456744567456" },
   { user: "ESKAnQfbdU8THQhbXXmzJyQWCVfHVCWZBYjA2RjxSG8v", volume: "23423345234544123423423354567734" },
   { user: "4rhfPZRBcZkoSzStSCFLo6KmLiX2eBAMigZh2bBLPYMw", volume: "2346234623464567456234523474567234" },
 ]

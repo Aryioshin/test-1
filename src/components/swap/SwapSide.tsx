@@ -25,7 +25,8 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
   const chainId = useChainId();
   const { isNative } = TOKEN_LIST[coin];
   const [balance, setBalance] = useState(0);
-  const {isQuoteLoading} = useAppContext();
+  const { isQuoteLoading, isAbleSwap, setIsAbleSwap } = useAppContext();
+  const [isWarning, setIsWarning] = useState(false);
 
   useEffect(() => {
     const getBalance = async () => {
@@ -40,9 +41,15 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
     getBalance();
   }, [coin, address, config, chainId])
 
-
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    if (parseFloat(value) > balance) {
+      setIsWarning(true);
+      setIsAbleSwap(false);
+    } else {
+      setIsWarning(false);
+      setIsAbleSwap(true);
+    }
     setAmount(value);
   };
 
@@ -68,14 +75,14 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
       <div className="flex items-center justify-between gap-3">
         <TokenSelect coin={coin} setCoin={setCoin} />
         <div className="flex items-center w-2/3">
-        {disabled && isQuoteLoading ? <InputSkeleton/> :
-          <input
-            className="bg-transparent w-full text-right focus:outline-0 pr-2 text-2xl text-white px-3 h-12 z-20"
-            value={amount ? amount: ""}
-            placeholder="0"
-            disabled={disabled}
-            onChange={handleAmountChange}
-          />}
+          {disabled && isQuoteLoading ? <InputSkeleton /> :
+            <input
+              className={`bg-transparent w-full text-right focus:outline-0 font-bold pr-2 text-2xl px-3 h-12 z-20 ${isWarning || !isAbleSwap ? "text-red-400" : "text-white"}`}
+              value={amount ? amount : ""}
+              placeholder="0"
+              disabled={disabled}
+              onChange={handleAmountChange}
+            />}
         </div>
       </div>
       <div className="flex justify-end w-1/2 h-full absolute right-0 top-0"></div>
