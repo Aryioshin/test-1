@@ -5,22 +5,32 @@ import { ArrowUpDown, Wallet2 } from "lucide-react"
 import ActionButton from "@/components/ActionButton"
 import { useCallback, useEffect, useState } from "react"
 import { TOKEN_LIST } from "@/config"
-import { useAccount } from "wagmi"
-import { mint, withdraw } from "@/utils/actions"
+import { useAccount, useConfig } from "wagmi"
 import Image from "next/image"
 import { toast } from "react-toastify"
+import { swapTokens, getQuote, getVolumes } from "@/utils/actions"
+import { Address } from "viem"
+import { useRouter } from "next/navigation"
 
 export default function Page() {
   const [baseToken, setBaseToken] = useState(0);
   const [quoteToken, setQuoteToken] = useState(0);
   const [baseAmount, setBaseAmount] = useState(0);
   const [quoteAmount, setQuoteAmount] = useState(0);
+  const [isSwapping, setIsSwapping] = useState(false);
   const { address } = useAccount();
+  const router = useRouter();
+  const config = useConfig();
+
+  const changeQuote = async () => {
+    const res = await getQuote(config, baseToken, baseAmount, quoteToken);
+    if (res != undefined) setQuoteAmount(res);
+  }
 
   useEffect(() => {
-    console.log("baseToken", baseToken)
-    console.log("quoteToken", quoteToken)
-  }, [baseToken, quoteToken]);
+    if (baseToken == quoteToken) return;
+    changeQuote();
+  }, [config, baseToken, quoteToken, baseAmount]);
 
   const clear = () => {
     setBaseToken(0)
@@ -31,22 +41,32 @@ export default function Page() {
 
   const swap = useCallback(async () => {
     if (baseToken == quoteToken) return;
-    let res:boolean | undefined;
-    if (TOKEN_LIST[baseToken].isNative && TOKEN_LIST[quoteToken].name == "WCRO") { res = await mint(quoteToken, baseAmount, address) }
-    if (TOKEN_LIST[quoteToken].isNative && TOKEN_LIST[baseToken].name == "WCRO") { res = await withdraw(baseToken, baseAmount, address) }
+    setIsSwapping(true);
+    const res: boolean = await swapTokens(config, baseToken, quoteToken, baseAmount, address)
     if (res) {
       clear();
-      toast.success("Transaction successfully finished")
+      toast.success("Transaction successfully finished");
     }
-  }, [quoteToken, baseAmount, address])
+    setIsSwapping(false);
+  }, [baseToken, quoteToken, baseAmount, address])
   return (
     <div className="flex justify-center items-center w-full h-[100vh] text-orange-400">
+      <div className={`bg-gray-50/70 fixed w-full h-full z-50 ${isSwapping ? "block" : "hidden"}`}>
+        <div className="flex justify-center items-center w-full h-full">
+          <div className="relative aspect-square w-[100px]">
+            <Image src="/loading.gif" fill alt=""/>
+          </div>
+        </div>
+      </div>
       <div className="relative w-[450px] bg-green-950/80 px-5 pt-10 pb-4 mx-4 shadow-3xl shadow-green-600/70 rounded-3xl backdrop-blur-sm">
         <div className="flex justify-between gap-2 px-8">
-          <div className="rounded flex justify-center items-center text-2xl font-bold hover:cursor-pointer text-orange-300 hover:text-blue-400">
+          <div className="rounded flex justify-center items-center text-3xl font-bold hover:cursor-pointer text-green-200">
             SWAP
           </div>
-          <div className="rounded flex justify-center items-center text-md hover:cursor-pointer hover:text-blue-400 text-gray-400">
+          <div onClick={()=>{router.push("/competition")}} className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">
+            BATTLE
+          </div>
+          <div className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">
             STAKING
           </div>
         </div>
