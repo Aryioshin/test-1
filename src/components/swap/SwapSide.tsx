@@ -27,19 +27,20 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
   const [balance, setBalance] = useState(0);
   const { isQuoteLoading, isAbleSwap, setIsAbleSwap } = useAppContext();
   const [isWarning, setIsWarning] = useState(false);
+  const {isSwapped} = useAppContext();
 
-  useEffect(() => {
-    const getBalance = async () => {
-      if (isNative) {
-        const balance = await getNativeBalance(config, address as Address, chainId);
-        setBalance(balance)
-      } else {
-        const balance = await getTokenBalance(config, address as Address, chainId, coin);
-        setBalance(balance);
-      }
+  const getBalance = async () => {
+    if (isNative) {
+      const balance = await getNativeBalance(config, address as Address, chainId);
+      setBalance(balance)
+    } else {
+      const balance = await getTokenBalance(config, address as Address, chainId, coin);
+      setBalance(balance);
     }
-    getBalance();
-  }, [coin, address, config, chainId])
+  }
+  useEffect(() => {
+    if(!isSwapped) getBalance();
+  }, [coin, address, config, chainId, isSwapped])
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

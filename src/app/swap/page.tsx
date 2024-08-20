@@ -14,15 +14,15 @@ import { useRouter } from "next/navigation"
 import { useAppContext } from "@/context/AppContext"
 
 export default function Page() {
-  const [baseToken, setBaseToken] = useState(0);
-  const [quoteToken, setQuoteToken] = useState(0);
+  const [baseToken, setBaseToken] = useState(3);
+  const [quoteToken, setQuoteToken] = useState(2);
   const [baseAmount, setBaseAmount] = useState(0);
   const [quoteAmount, setQuoteAmount] = useState(0);
   const [isSwapping, setIsSwapping] = useState(false);
   const { address } = useAccount();
   const router = useRouter();
   const config = useConfig();
-  const { setIsQuateLoading } = useAppContext();
+  const { setIsQuateLoading, swapChange } = useAppContext();
 
   const changeQuote = async () => {
     const res = await getQuote(config, baseToken, baseAmount, quoteToken);
@@ -42,11 +42,11 @@ export default function Page() {
     load();
   }, [config, baseToken, quoteToken, baseAmount]);
 
-  const clear = () => {
-    setBaseToken(0)
-    setQuoteToken(0)
-    setBaseAmount(0)
-    setQuoteAmount(0)
+  const exchangeToken = () => {
+    const base = baseToken;
+    const quote = quoteToken;
+    setBaseToken(quote);
+    setQuoteToken(base);
   }
 
   const swap = useCallback(async () => {
@@ -54,7 +54,7 @@ export default function Page() {
     setIsSwapping(true);
     const res: boolean = await swapTokens(config, baseToken, quoteToken, baseAmount, address)
     if (res) {
-      clear();
+      swapChange();
       toast.success("Transaction successfully finished");
     }
     setIsSwapping(false);
@@ -82,7 +82,7 @@ export default function Page() {
         </div>
         <div className="mt-[10px] flex flex-col relative">
           <SwapSide setCoin={setBaseToken} coin={baseToken} amount={baseAmount} setAmount={setBaseAmount} />
-          <div className="w-14 h-14 grid place-content-center rounded-full bg-green-600/20 backdrop-blur-sm shadow-3s absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+          <div onClick={exchangeToken} className="w-14 h-14 grid place-content-center rounded-full bg-green-600/20 backdrop-blur-sm shadow-3s absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
             <Image src="/swap.png" fill alt="" />
           </div>
           <SwapSide className="mt-5" disabled setCoin={setQuoteToken} coin={quoteToken} amount={quoteAmount} setAmount={setQuoteAmount} />

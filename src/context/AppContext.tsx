@@ -6,8 +6,11 @@ import { useContext, createContext, ReactNode, useState, Dispatch, SetStateActio
 interface AppContextType {
   isQuoteLoading: boolean;
   isAbleSwap: boolean;
+  isSwapped: boolean;
   setIsQuateLoading: Dispatch<SetStateAction<boolean>>;
   setIsAbleSwap: Dispatch<SetStateAction<boolean>>;
+  setIsSwapped: Dispatch<SetStateAction<boolean>>;
+  swapChange: () => void;
 }
 
 // Create the context with a default value (can be `undefined`)
@@ -21,9 +24,15 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   // Define the value that will be provided to all consumers of this context
   const [isQuoteLoading, setIsQuateLoading] = useState(false);
   const [isAbleSwap, setIsAbleSwap] = useState(false);
+  const [isSwapped, setIsSwapped] = useState(false);
+
+  const swapChange = () => {
+    setIsSwapped(true);
+    setTimeout(() => setIsSwapped(false), 1000);
+  }
 
   return (
-    <AppContext.Provider value={{ isQuoteLoading, isAbleSwap, setIsQuateLoading, setIsAbleSwap }}>
+    <AppContext.Provider value={{ isQuoteLoading, isAbleSwap, isSwapped, setIsQuateLoading, setIsAbleSwap, setIsSwapped, swapChange }}>
       {children}
     </AppContext.Provider>
   );
