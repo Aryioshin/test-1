@@ -12,7 +12,7 @@ export default function Page() {
   useEffect(() => {
     const load = async () => {
       const res: any | never = await getVolumes();
-      if (res) setUserVolume(res);
+      if (res) setUserVolume(volumeSort(res));
     }
     setTimeout(() => {
       load();
