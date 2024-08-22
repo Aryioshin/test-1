@@ -61,7 +61,7 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, o
 
   return (
     <div className={`bg-green-700/70 px-4 py-9 relative rounded-2xl ${className}`}>
-      <div className="absolute right-4 top-2 z-20">
+      <div className="absolute right-4 top-4 z-20">
         <div className="flex items-center gap-2">
           Balance: <span>{balance}</span>
           {!disabled && (
