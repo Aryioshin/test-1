@@ -154,12 +154,12 @@ export const deposit = async (config: Config, amount: number, address: Address |
 }
 
 export const withdraw = async (config: Config, tokenId: number, tokenAmount: number, address: Address | undefined) => {
-  const amount = BigInt(tokenAmount * 10 ** 18)
+  const token: any = TOKEN_LIST[tokenId];
+  const amount = BigInt(tokenAmount * 10 ** token.decimal)
   const res = await approve(config, tokenId, amount);
   if (!res) {
     return false;
   }
-  const token: any = TOKEN_LIST[tokenId]
   const abi = Abis[token.name];
 
   try {
@@ -191,13 +191,13 @@ export const withdraw = async (config: Config, tokenId: number, tokenAmount: num
 }
 
 export const swapTokenForNative = async (config: Config, baseToken: number, baseAmount: number, address: Address | undefined) => {
-  const amountIn = BigInt(baseAmount * 10 ** 18);
+  const token: any = TOKEN_LIST[baseToken];
+  const amountIn = BigInt(baseAmount * 10 ** token.decimal);
   const amountOut = 0;
   const res = await approve(config, baseToken, amountIn);
   if (!res) {
     return false;
   }
-  const token: any = TOKEN_LIST[baseToken];
 
   try {
     await writeContract(config, {
@@ -250,14 +250,14 @@ export const swapNativeForToken = async (config: Config, quoteToken: number, bas
 }
 
 export const swapTokenForToken = async (config: Config, baseToken: number, quoteToken: number, baseAmount: number, address: Address | undefined) => {
-  const amountIn = BigInt(baseAmount * 10 ** 18);
+  const fromToken: any = TOKEN_LIST[baseToken];
+  const toToken: any = TOKEN_LIST[quoteToken];
+  const amountIn = BigInt(baseAmount * 10 ** fromToken.decimal);
   const amountOut = 0;
   const res = await approve(config, baseToken, amountIn);
   if (!res) {
     return false;
   }
-  const fromToken: any = TOKEN_LIST[baseToken];
-  const toToken: any = TOKEN_LIST[quoteToken];
 
   try {
     await writeContract(config, {
