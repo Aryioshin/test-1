@@ -1,12 +1,6 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_feeToSetter",
-        "type": "address"
-      }
-    ],
+    "inputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -45,7 +39,7 @@
   {
     "constant": true,
     "inputs": [],
-    "name": "INIT_CODE_PAIR_HASH",
+    "name": "INIT_CODE_HASH",
     "outputs": [
       {
         "internalType": "bytes32",

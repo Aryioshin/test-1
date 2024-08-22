@@ -14,12 +14,13 @@ interface SwapSideProps {
   className?: string;
   disabled?: boolean;
   coin?: number;
+  opCoin?:number;
   amount?: number;
   setCoin?: (value: any) => void;
   setAmount?: (value: any) => void;
 }
 
-export default function SwapSide({ className = "", disabled = false, coin = 0, setCoin, amount, setAmount = () => { } }: SwapSideProps) {
+export default function SwapSide({ className = "", disabled = false, coin = 0, opCoin, setCoin, amount, setAmount = () => { } }: SwapSideProps) {
   const config = useConfig();
   const { address } = useAccount();
   const chainId = useChainId();
@@ -74,7 +75,7 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, s
         </div>
       </div>
       <div className="flex items-center justify-between gap-3">
-        <TokenSelect coin={coin} setCoin={setCoin} />
+        <TokenSelect coin={coin} opCoin={opCoin} setCoin={setCoin} />
         <div className="flex items-center w-2/3">
           {disabled && isQuoteLoading ? <InputSkeleton /> :
             <input

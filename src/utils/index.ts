@@ -5,13 +5,11 @@ import WCRO from '@/abis/WCRO.json';
 import Contract from '@/abis/Contract.json';
 import VVS2_Router_Abi from '@/abis/VVS2_Router.json';
 import FACTORY from '@/abis/Factory.json';
-import PairContract from '@/abis/PairContract.json';
 
 export const Abis: {[key: string]: any} = { ARY, USDC, USDT, WCRO };
 export const CONTRACT_ABI = Contract;
 export const VVS2_ABI = VVS2_Router_Abi;
 export const FACTORY_ABI = FACTORY;
-export const PAIR_ABI = PairContract;
 
 export interface TokenConfig {
   name: keyof typeof Abis;

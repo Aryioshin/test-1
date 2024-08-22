@@ -81,11 +81,11 @@ export default function Page() {
           </div>
         </div>
         <div className="mt-[10px] flex flex-col relative">
-          <SwapSide setCoin={setBaseToken} coin={baseToken} amount={baseAmount} setAmount={setBaseAmount} />
+          <SwapSide setCoin={setBaseToken} coin={baseToken} opCoin={quoteToken} amount={baseAmount} setAmount={setBaseAmount} />
           <div onClick={exchangeToken} className="w-14 h-14 grid place-content-center rounded-full bg-green-600/20 backdrop-blur-sm shadow-3s absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
             <Image src="/swap.png" fill alt="" />
           </div>
-          <SwapSide className="mt-5" disabled setCoin={setQuoteToken} coin={quoteToken} amount={quoteAmount} setAmount={setQuoteAmount} />
+          <SwapSide className="mt-5" disabled setCoin={setQuoteToken} coin={quoteToken} opCoin={baseToken} amount={quoteAmount} setAmount={setQuoteAmount} />
         </div>
         <div className="mt-4" >
           <ActionButton swap={swap} />

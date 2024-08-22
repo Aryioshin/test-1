@@ -58,14 +58,16 @@ export default function ConnectWalletButton({ swap } : any) {
                 );
               }
 
-              // if (chainId != cronos.id && chainId != cronosTestnet.id) {
-              //   return (
-              //     <button onClick={switchChainHandle} type="button"
-              //       className='w-full py-3 bg-green-600 text-xl rounded-xl hover:shadow-button hover:shadow-blue-400 hover:text-blue-400 text-orange-700 uppercase tracking-widest'>
-              //       Switch Chain
-              //     </button>
-              //   )
-              // }
+              if (chainId != cronos.id && chainId != cronosTestnet.id) {
+                return (
+                  <button onClick={switchChainHandle} type="button"
+                    className='w-full py-3 bg-green-600 text-xl rounded-xl hover:shadow-button hover:shadow-blue-400 hover:text-blue-400 text-orange-700 uppercase tracking-widest'>
+                    <div className='relative w-12 h-12'>
+                      <Image src="/switch.png" fill alt="" />
+                    </div>
+                  </button>
+                )
+              }
 
               if (chain.unsupported) {
                 return (

@@ -3,16 +3,13 @@ import { readContract, writeContract } from '@wagmi/core';
 import { config } from '../config/wagmi';
 import { Address } from 'viem';
 import { Abis } from '@/utils';
-import { CONTRACT_ADDRESS, TOKEN_LIST, WCRO, VVS2Router, fee, FACTORY, } from '../config';
-import { currentChain } from '@/config'
-import { nativeCoin } from '../config';
-import { CONTRACT_ABI, VVS2_ABI, FACTORY_ABI, PAIR_ABI } from '@/utils';
+import { CONTRACT_ADDRESS, TOKEN_LIST, WCRO, VVS2Router, fee, } from '../config';
+import { CONTRACT_ABI, VVS2_ABI } from '@/utils';
 import { getBalance } from 'wagmi/actions';
 import { parseEther } from 'viem'
 import { waitForTransactionReceipt } from 'wagmi/actions';
 import { toast } from 'react-toastify';
 import { Config } from "wagmi"
-import { IToken } from '../config';
 
 export interface IVolume {
   user: Address;
@@ -21,9 +18,15 @@ export interface IVolume {
 
 export const getNativeBalance = async (config: Config, address: Address, chainId: number) => {
   if (!address) return 0;
-  const { decimals, value } = await getBalance(config, { address, chainId });
+  try {
+    const { decimals, value } = await getBalance(config, { address, chainId });
+    return convertBignitTofloat(value, decimals);
+  } catch (error) {
+    console.log(error);
+    toast.warning("Switch to the Cronos chain.");
+    return 0
+  }
 
-  return convertBignitTofloat(value, decimals);
 }
 
 export const getQuote = async (config: Config, baseToken: number, baseAmount: number, quoteToken: number) => {
@@ -67,12 +70,17 @@ export const getTokenBalance = async (config: Config, address: Address, chainId:
   const tokenAddress = token.address;
   const abi = Abis[token.name]
   if (!address || !config || !tokenAddress) return 0;
-  const tokenBalance = await readContract(config, {
-    abi, functionName: 'balanceOf',
-    address: tokenAddress as Address, args: [address as Address]
-  })
+  try {
+    const tokenBalance = await readContract(config, {
+      abi, functionName: 'balanceOf',
+      address: tokenAddress as Address, args: [address as Address]
+    })
 
-  return convertBignitTofloat(tokenBalance, token.decimal);
+    return convertBignitTofloat(tokenBalance, token.decimal);
+  } catch (error) {
+    toast.warning("Switch to the Cronos Chain");
+    return 0;
+  }
 }
 
 export const convertBignitTofloat = (value: any, decimal: number) => {
@@ -276,7 +284,6 @@ export const swapTokenForToken = async (config: Config, baseToken: number, quote
 
 export const swapTokens = async (config: Config, baseToken: number, quoteToken: number, baseAmount: number, address: Address | undefined) => {
   let res: boolean;
-  const chainId = currentChain.id;
   if (TOKEN_LIST[baseToken].isNative) {
     if (TOKEN_LIST[quoteToken].name == "WCRO") {
       res = await deposit(config, baseAmount, address);
@@ -351,8 +358,8 @@ export const clearVolume = async () => {
 export const convertBignitToString = (num: BigInt) => {
   const eth: any = Number(num) / 10 ** 18;
   const head = eth.toString().split(".")[0];
-  if(head.length > 9) return head.slice(0, head.length - 9) + "B";
-  if(head.length > 6) return head.slice(0, head.length - 6) + "M";
-  if(head.length > 3) return head.slice(0, head.length - 3) + "K";
+  if (head.length > 9) return head.slice(0, head.length - 9) + "B";
+  if (head.length > 6) return head.slice(0, head.length - 6) + "M";
+  if (head.length > 3) return head.slice(0, head.length - 3) + "K";
   return eth.toFixed(3)
 }

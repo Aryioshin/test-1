@@ -144,22 +144,9 @@
   },
   {
     "inputs": [],
-    "name": "clearVolume",
+    "name": "clear",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "competition_started",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -254,20 +241,6 @@
       }
     ],
     "name": "setFeeData",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "startCompetition",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "stopCompetition",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
