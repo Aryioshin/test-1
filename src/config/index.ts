@@ -32,7 +32,7 @@ export const WCRO = { name: "WCRO", isNative: false, address: "0x5C7F8A570d578ED
 
 export const VVS2Router = "0x145863Eb42Cf62847A6Ca784e6416C1682b1b2Ae"
 
-export const CONTRACT_ADDRESS = "0x17B094Db1195411872a973fc1482746E6F7Ec976" //will be change
+export const CONTRACT_ADDRESS = "0x9c75fFB4Ed376f9a67a7ffF098A6F967D95285E0" //will be change
 export const FACTORY = "0x3B44B2a187a7b3824131F8db5a74194D0a42Fc15";
 
 export const nativeCoinId = 0
