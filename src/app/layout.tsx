@@ -15,8 +15,8 @@ const TopBarDynamic = dynamic(() => import('@/components/layout/TopBar'), { ssr:
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ARY HOME: The Trading Competitions",
-  description: "Welcome to ARY HOME,where you can easily exchange our tokens and compete to win exciting rewards based on their ARY trading volume.",
+  title: "ARY HOME: Empowering Users with ABC Token",
+  description: "Welcome to ARY HOM,where you can easily exchange our tokens and compete to win exciting rewards based on their ARY trading volume.",
 };
 
 function RootLayout({ children }: { children: React.ReactNode }) {

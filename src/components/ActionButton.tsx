@@ -2,6 +2,7 @@
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useSwitchChain, useChainId, } from 'wagmi';
+// import { base, cronos, cronosTestnet, mainnet } from 'viem/chains';
 import { base, cronos, cronosTestnet, mainnet } from 'viem/chains';
 import Image from 'next/image';
 
@@ -58,6 +59,7 @@ export default function ConnectWalletButton({ swap } : any) {
                 );
               }
 
+              console.log("wfwf", chainId, cronos.id, chainId, cronosTestnet.id)
               if (chainId != cronos.id && chainId != cronosTestnet.id) {
                 return (
                   <button onClick={switchChainHandle} type="button"

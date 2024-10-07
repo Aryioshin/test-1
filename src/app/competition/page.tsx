@@ -27,7 +27,7 @@ export default function Page() {
           <div className="text-3xl hover:cursor-pointer font-bold">
             BATTLE
           </div>
-          <div className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">STAKING</div>
+          <div className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100" onClick={() => { router.push("/staking") }}>STAKING</div>
         </div>
         <VolumeTable userVolume={userVolume} />
         <PrizeTable />

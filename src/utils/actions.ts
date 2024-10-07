@@ -75,9 +75,11 @@ export const getTokenBalance = async (config: Config, address: Address, chainId:
       abi, functionName: 'balanceOf',
       address: tokenAddress as Address, args: [address as Address]
     })
-
+    console.log("ZXCV", token, tokenAddress);
     return convertBignitTofloat(tokenBalance, token.decimal);
   } catch (error) {
+    console.log("ZXCV", token, tokenAddress);
+
     toast.warning("Switch to the Cronos Chain");
     return 0;
   }
@@ -283,6 +285,7 @@ export const swapTokenForToken = async (config: Config, baseToken: number, quote
 
 
 export const swapTokens = async (config: Config, baseToken: number, quoteToken: number, baseAmount: number, address: Address | undefined) => {
+  console.log("config:",config);
   let res: boolean;
   if (TOKEN_LIST[baseToken].isNative) {
     if (TOKEN_LIST[quoteToken].name == "WCRO") {

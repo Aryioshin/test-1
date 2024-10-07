@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import SwapSide from "@/components/swap/SwapSide"
 import { ArrowUpDown, Wallet2 } from "lucide-react"
@@ -76,7 +76,7 @@ export default function Page() {
           <div onClick={() => { router.push("/competition") }} className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">
             BATTLE
           </div>
-          <div className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">
+          <div onClick={() => { router.push("/staking") }}  className="text-2xl text-gray-400 hover:text-blue-400 hover:cursor-pointer hover:scale-125 hover:bottom-4 bottom-0 transition-all duration-100">
             STAKING
           </div>
         </div>

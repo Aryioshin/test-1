@@ -28,6 +28,7 @@ const config: Config = {
         "primary-gray-100": "#1E2A44",
         "primary-gray-200": "#141823",
         "primary-gray-300": "#0E1119",
+        "green-1": "#0E5929",
       }
     },
   },

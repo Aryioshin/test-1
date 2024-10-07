@@ -27,7 +27,7 @@ export default function PrizeTable() {
             </div>
           </div>
           <div className="w-1/3 text-center text-[25px] text-yellow-400">
-            500$
+            120$
           </div>
         </div>
         <div className="flex justify-center gap-8 my-6">
@@ -37,7 +37,7 @@ export default function PrizeTable() {
             </div>
           </div>
           <div className="w-1/3 text-center text-[25px] text-yellow-400">
-            300$
+            80$
           </div>
         </div>
         <div className="flex justify-center gap-8 my-6">
@@ -47,7 +47,7 @@ export default function PrizeTable() {
             </div>
           </div>
           <div className="w-1/3 text-center text-[25px] text-yellow-400">
-            200$
+            50$
           </div>
         </div>
       </div>
