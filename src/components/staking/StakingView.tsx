@@ -30,7 +30,7 @@ export default function StakigView(props: any) {
           }}
           className="hover:cursor-pointer"
         >
-          <h1 className="text-orange-500 text-2xl hover:text-4xl text-center my-4 pt-[20px]">
+          <h1 className="text-orange-500 text-2xl  text-center my-4 pt-[20px]">
             Stake Now
           </h1>
         </div>
