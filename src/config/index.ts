@@ -31,12 +31,13 @@ export const TOKEN_LIST = [
 // ]
 
 export const WCRO = { name: "WCRO", isNative: false, address: "0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23", decimal: 18 }
-
+ 
 export const VVS2Router = "0x145863Eb42Cf62847A6Ca784e6416C1682b1b2Ae"
 // export const VVS2Router = "0xC532a74256D3Db42D0Bf7a0400fEFDbad7694008"
 
 // export const CONTRACT_ADDRESS = "0x17B094Db1195411872a973fc1482746E6F7Ec976" //will be change
-export const CONTRACT_ADDRESS = "0xfb34116ed889ae6487e1abe872b9e87ce70240ad" //will be change
+// export const CONTRACT_ADDRESS = "0xfb34116ed889ae6487e1abe872b9e87ce70240ad" //will be change
+export const CONTRACT_ADDRESS = "0xb4d3793b4aa0be8cd0e829357af425aace4bb7f9" //will be change
 export const FACTORY = "0x3B44B2a187a7b3824131F8db5a74194D0a42Fc15";
 // export const FACTORY = "0x7E0987E5b3a30e3f2828572Bb659A548460a3003";
 
