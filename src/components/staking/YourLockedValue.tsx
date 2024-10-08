@@ -12,7 +12,7 @@ export default function YourLockedValue(props: any) {
         </h1>
       </div>
       <h1 className="text-orange-00 text-5xl text-center my-6 ml-[40px] animate-pulse drop-shadow-lg">
-        {formatEther(value)}
+        {parseFloat(formatEther(value))}
       </h1>
     </div>
   );

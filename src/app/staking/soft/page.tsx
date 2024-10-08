@@ -24,6 +24,7 @@ import { Emerwithdraw } from "@/utils/safeStakeActions";
 import Image from "next/image";
 import { useSwitchChain, useChainId } from "wagmi";
 import { base, cronos, cronosTestnet, mainnet } from "viem/chains";
+import { getTokenBalance } from "@/utils/actions";
 
 export default function Page() {
   const router = useRouter();
@@ -114,8 +115,9 @@ export default function Page() {
     return rewardRemainValue;
   };
 
-  const selectMax = () => {
-    setAmount(100);
+  const selectMax = async () => {
+    const balance = await getTokenBalance(config, address as Address, chainId, 2);
+    setAmount(balance);
   };
 
   return (
@@ -159,7 +161,7 @@ export default function Page() {
               </h1>
               <button
                 onClick={selectMax}
-                className="bg-primary-gray-300 h-8 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
+                className="bg-primary-gray-300 h-8 mt-8 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
               >
                 100%
               </button>
