@@ -34,6 +34,7 @@ export default function Page() {
   // const config = useConfig();
   const { address } = useAccount();
   const [amount, setAmount] = useState(0);
+  const [showAmount, setShowAmount] = useState(0);
   const config1 = useConfig();
   const [rewardRemainValue, setRewardRemainValue] = useState("");
   const chainId = useChainId();
@@ -71,8 +72,9 @@ export default function Page() {
   // }, [baseAmount, address]))
 
   const handleAmountChange = (e: any) => {
-    const value = e.target.value * Math.pow(10, 18);
+    const value = e.target.value* Math.pow(10, 18);
     setAmount(value);
+    setShowAmount(e.target.value);
     console.log("chchchch:" + value);
   };
 
@@ -117,7 +119,7 @@ export default function Page() {
 
   const selectMax = async () => {
     const balance = await getTokenBalance(config, address as Address, chainId, 2);
-    setAmount(balance);
+    setShowAmount(balance);
   };
 
   return (
@@ -168,7 +170,7 @@ export default function Page() {
               <input
                 className="bg-transparent w-[80px] text-right focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-5xl text-center px-3 h-12 z-20 text-orange-00"
                 placeholder="0"
-                value={amount ? amount : ""}
+                value={showAmount ? showAmount : ""}
                 // disabled={disabled}
                 onChange={handleAmountChange}
               />
