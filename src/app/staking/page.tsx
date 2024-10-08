@@ -76,12 +76,12 @@ export default function Page() {
           ))}
           <div className="flex bg-green-700/30 relative rounded-2xl mt-12 mb-8">
             <div className="flex flex-col w-[40%]  px-2 py-5  bg-green-700/30 rounded-2xl">
-              <h1 className="text-orange-200 text-5xl text-center my-4 font-semibold">
+              <h1 className="text-orange-200 text-4xl text-center my-4 font-semibold">
                 Hard Stake
               </h1>
             </div>
             <div className="flex flex-col w-[60%] items-center my-6 px-[80px] py-5">
-              <h1 className="text-orange-00 text-3xl my-4">Coming soon</h1>
+              <h1 className="text-orange-00 text-2xl my-4">Coming soon</h1>
             </div>
           </div>
         </div>

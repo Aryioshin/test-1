@@ -173,7 +173,7 @@ export default function Page() {
               <YourLockedValue value={yourValue} />
             </div>
             <div className="flex justify-center items-center">
-              <h1 className="text-orange-00 text-5xl text-center w-[129px] mt-[15px]">
+              <h1 className="text-orange-00 text-4xl text-center w-[129px] mt-[15px]">
                 Input
               </h1>
               <button

@@ -20,7 +20,7 @@ export default function StakigView(props: any) {
   return (
     <div className="flex bg-green-700/30 relative rounded-2xl mt-12 mb-8">
       <div className="flex flex-col w-[40%]  px-2 py-5  bg-green-700/30 rounded-2xl">
-        <h1 className="text-orange-200 text-5xl text-center my-4 font-semibold">
+        <h1 className="text-orange-200 text-4xl text-center my-4 font-semibold">
           {STAKING_TYPES[id].stakeMode}
         </h1>
         <div
@@ -30,7 +30,7 @@ export default function StakigView(props: any) {
           }}
           className="hover:cursor-pointer"
         >
-          <h1 className="text-orange-500 text-3xl hover:text-4xl text-center my-4 pt-[20px]">
+          <h1 className="text-orange-500 text-2xl hover:text-4xl text-center my-4 pt-[20px]">
             Stake Now
           </h1>
         </div>
