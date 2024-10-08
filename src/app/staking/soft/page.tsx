@@ -39,6 +39,7 @@ export default function Page() {
   const [rewardRemainValue, setRewardRemainValue] = useState("");
   const chainId = useChainId();
   const { chains, switchChain, error } = useSwitchChain();
+  const [tooltipFlg, setToolTipFlg] = useState(0);
 
   const switchChainHandle = async () => {
     switchChain({ chainId: cronos.id });
@@ -72,7 +73,7 @@ export default function Page() {
   // }, [baseAmount, address]))
 
   const handleAmountChange = (e: any) => {
-    const value = e.target.value* Math.pow(10, 18);
+    const value = e.target.value * Math.pow(10, 18);
     setAmount(value);
     setShowAmount(e.target.value);
     console.log("chchchch:" + value);
@@ -114,13 +115,26 @@ export default function Page() {
 
   const showRemain = (rewardRemainValue: string) => {
     console.log("reward Remain -> " + rewardRemainValue);
-    return rewardRemainValue;
+    const start: any = rewardRemainValue.slice(0, 3); // Get first 3 digits
+    const end: any = rewardRemainValue.slice(-3); // Get last 3 digits
+    return `${start}...${end}`; // Combine with ellipsis
+    // return rewardRemainValue;
   };
 
   const selectMax = async () => {
-    const balance = await getTokenBalance(config, address as Address, chainId, 2);
+    const balance = await getTokenBalance(
+      config,
+      address as Address,
+      chainId,
+      2
+    );
     setShowAmount(balance);
     setAmount(balance * Math.pow(10, 18));
+  };
+
+  const showToolTip = () => {
+    if(tooltipFlg === 0) setToolTipFlg(1);
+    else setToolTipFlg(0);
   };
 
   return (
@@ -197,6 +211,22 @@ export default function Page() {
                 >
                   Claim ( {showRemain(rewardRemainValue)} )
                 </div>
+                <button
+                  onClick={showToolTip}
+                  className="bg-primary-gray-300 h-5 mt-2 ml-2 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
+                >
+                  ...
+                </button>
+
+                {tooltipFlg === 1 ? (
+                  <div className="tooltip absolute bg-gray-700 text-white text-lg rounded-lg p-2 whitespace-nowrap left-1/2 transform -translate-x-1/2 -translate-y-full">
+                    {rewardRemainValue}
+                  </div>
+                ) : (
+                  <div className="tooltip absolute hidden bg-gray-700 text-white text-lg rounded-lg p-2 whitespace-nowrap left-1/2 transform -translate-x-1/2 -translate-y-full">
+                    {rewardRemainValue}
+                  </div>
+                )}
               </button>
 
               <button

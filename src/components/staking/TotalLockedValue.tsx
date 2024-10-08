@@ -12,7 +12,7 @@ export default function TotalLockedValue(props: any) {
         Total Locked Value
       </h1>
       <h1 className="text-orange-500 text-7xl text-center my-4 animate-pulse drop-shadow-lg">
-        {parseFloat(formatEther(value))}
+        {parseFloat(formatEther(value)).toFixed(2)}
       </h1>
     </div>
   );

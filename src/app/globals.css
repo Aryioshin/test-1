@@ -48,6 +48,16 @@ body::before {
   z-index: -1;
 }
 
+.tooltip {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.relative:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
