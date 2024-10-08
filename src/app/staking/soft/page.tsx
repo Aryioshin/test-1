@@ -120,6 +120,7 @@ export default function Page() {
   const selectMax = async () => {
     const balance = await getTokenBalance(config, address as Address, chainId, 2);
     setShowAmount(balance);
+    setAmount(balance * Math.pow(10, 18));
   };
 
   return (
