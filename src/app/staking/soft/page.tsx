@@ -114,6 +114,10 @@ export default function Page() {
     return rewardRemainValue;
   };
 
+  const selectMax = () => {
+    setAmount(100);
+  };
+
   return (
     <div className="flex justify-center items-center w-full h-[100vh] text-green-200 pt-[100px]">
       <div className="relative w-[calc(100%-10px)] md:w-[700px] bg-green-950/80 px-5 pt-10 pb-4 mx-4 shadow-3xl shadow-green-600/70 rounded-3xl backdrop-blur-sm">
@@ -149,13 +153,20 @@ export default function Page() {
             <div className="flex flex-row">
               <YourLockedValue value={yourValue} />
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center items-center">
               <h1 className="text-orange-00 text-5xl text-center w-[129px] mt-[15px]">
                 Input
               </h1>
+              <button
+                onClick={selectMax}
+                className="bg-primary-gray-300 h-8 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
+              >
+                100%
+              </button>
               <input
                 className="bg-transparent w-[80px] text-right focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-5xl text-center px-3 h-12 z-20 text-orange-00"
                 placeholder="0"
+                value={amount ? amount : ""}
                 // disabled={disabled}
                 onChange={handleAmountChange}
               />
@@ -197,7 +208,7 @@ export default function Page() {
                   Withdraw
                 </div>
               </button>
-{/* 
+              {/* 
               <button
                 onClick={() => {
                   console.log("soft-all claimed!!!");
