@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function TopBar() {
   const openBridge = () => {
-    window.open("https://ary-frontend.vercel.app/", "_blank");
+    window.open("https://ary-frontend.vercel.app/",  "_blank");
   };
 
   return (
