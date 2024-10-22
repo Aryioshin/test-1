@@ -11,7 +11,7 @@ export interface IToken {
   decimal: number;
 }
 
-// For Cronos
+// For Sepolia
 export const TOKEN_LIST = [
   { name: "CRO", isNative: true, address: "", decimal: 18 },
   { name: "WCRO", isNative: false, address: "0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23", decimal: 18 },
