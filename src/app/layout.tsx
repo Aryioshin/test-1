@@ -15,7 +15,7 @@ const TopBarDynamic = dynamic(() => import('@/components/layout/TopBar'), { ssr:
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ARY HOME: Empowering Users with ABC Token",
+  title: "ARY HOME: swap,battle,stake in the ARY ecosystem simply",
   description: "Welcome to ARYHOME where you can easily trade your tokens, participate in volume competitions and stake your ARY.",
 };
 
