@@ -16,7 +16,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ARY HOME: Empowering Users with ABC Token",
-  description: "Welcome to ARY HOM,where you can easily exchange our tokens and compete to win exciting rewards based on their ARY trading volume.",
+  description: "Welcome to ARYHOME where you can easily trade your tokens, participate in volume competitions and stake your ARY.",
 };
 
 function RootLayout({ children }: { children: React.ReactNode }) {
