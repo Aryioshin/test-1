@@ -55,7 +55,7 @@ export default function Page() {
     const res: boolean = await swapTokens(config, baseToken, quoteToken, baseAmount, address)
     if (res) {
       swapChange();
-      toast.success("Transaction successfully finished");
+      toast.success("Transaction successfully finished!");
     }
     setIsSwapping(false);
   }, [baseToken, quoteToken, baseAmount, address])
