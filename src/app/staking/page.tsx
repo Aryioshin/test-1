@@ -16,7 +16,7 @@ import { getSoftAPR } from "@/utils/safeStakeActions";
 export default function Page() {
   const router = useRouter();
   const [userVolume, setUserVolume] = useState<Array<IVolume>>([]);
-  const numberOfStaking = 1;
+  const numberOfStaking = 2;
   const [totalValue, setTotalValue] = useState<number | any>(0);
   const [softPercent, setSoftPercent] = useState<number | any>(0);
 
@@ -74,7 +74,7 @@ export default function Page() {
           {Array.from({ length: numberOfStaking }, (_, index) => (
             <StakingView key={index} id={index} percent = {softPercent} />
           ))}
-          <div className="flex bg-green-700/30 relative rounded-2xl mt-12 mb-8">
+          {/* <div className="flex bg-green-700/30 relative rounded-2xl mt-12 mb-8">
             <div className="flex flex-col w-[40%]  px-2 py-5  bg-green-700/30 rounded-2xl">
               <h1 className="text-orange-200 text-4xl text-center my-4 font-semibold">
                 Hard Stake
@@ -83,7 +83,7 @@ export default function Page() {
             <div className="flex flex-col w-[60%] items-center my-6 px-[80px] py-5">
               <h1 className="text-orange-00 text-2xl my-4">Coming soon</h1>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

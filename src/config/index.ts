@@ -19,6 +19,7 @@ export const TOKEN_LIST = [
   { name: "USDC", isNative: false, address: "0xc21223249CA28397B4B6541dfFaEcC539BfF0c59", decimal: 6 },
   { name: "MERY", isNative: false, address: "0x3b41B27E74Dd366CE27cB389dc7877D4e1516d4d", decimal: 18 },
   { name: "USDT", isNative: false, address: "0x66e428c3f67a68878562e79A0234c1F83c208770", decimal: 6 },
+  { name: "TURTLE", isNative: false, address: "0x8C9E2bEf2962CE302ef578113eebEc62920B7e57", decimal: 18 },
 ]
 
 // export const TOKEN_LIST = [
@@ -37,7 +38,7 @@ export const VVS2Router = "0x145863Eb42Cf62847A6Ca784e6416C1682b1b2Ae"
 
 // export const CONTRACT_ADDRESS = "0x17B094Db1195411872a973fc1482746E6F7Ec976" //will be change
 // export const CONTRACT_ADDRESS = "0xfb34116ed889ae6487e1abe872b9e87ce70240ad" //will be change
-export const CONTRACT_ADDRESS = "0xb4d3793b4aa0be8cd0e829357af425aace4bb7f9" //will be change
+export const CONTRACT_ADDRESS = "0xc98DF1C5E808789001103fE641e1770714fF2639" //will be change
 export const FACTORY = "0x3B44B2a187a7b3824131F8db5a74194D0a42Fc15";
 // export const FACTORY = "0x7E0987E5b3a30e3f2828572Bb659A548460a3003";
 
