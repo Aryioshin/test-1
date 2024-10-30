@@ -1,7 +1,7 @@
 import { readContract, writeContract } from '@wagmi/core';
 import { Address } from 'viem';
-import { Abis } from '@/utils';
-import { CONTRACT_ADDRESS, TOKEN_LIST, WCRO, VVS2Router, fee, } from '../config/safeStakeConfig';
+import { Abis, CONTRACT_ABI_HARD } from '@/utils';
+import { CONTRACT_ADDRESS, TOKEN_LIST, WCRO, VVS2Router, fee, CONTRACT_ADDRESS_HARD, } from '../config/safeStakeConfig';
 import { CONTRACT_ABI_ARY, VVS2_ABI, ABI } from '@/utils';
 import { getBalance } from 'wagmi/actions';
 import { toast } from 'react-toastify';
@@ -50,7 +50,66 @@ export const getUserInfo = async (config: Config, owner: Address) => {
     } catch (error) {
       console.log("EEEEEEEEEEEEE", error);
     }
-    
+  }
+
+  export const getHardRate = async () => {
+    try {
+      console.log(config, "af");
+      const softPercent = await readContract(config, {
+        abi : CONTRACT_ABI_HARD,
+        address: CONTRACT_ADDRESS_HARD as Address,
+        functionName: "REWARD_RATE",
+      });
+      console.log(softPercent, "SADAAAAAAAAAAAAAA")
+      return softPercent;
+    } catch (error) {
+      console.log("EEEEEEEEEEEEE", error);
+    }
+  }
+
+  export const getHardUnlock = async () => {
+    try {
+      console.log(config, "af");
+      const softPercent = await readContract(config, {
+        abi : CONTRACT_ABI_HARD,
+        address: CONTRACT_ADDRESS_HARD as Address,
+        functionName: "WITHDRAWAL_LOCK_PERIOD",
+      });
+      console.log(softPercent, "SADAAAAAAAAAAAAAA")
+      return softPercent;
+    } catch (error) {
+      console.log("EEEEEEEEEEEEE", error);
+    }
+  }
+
+  export const getImmeFee = async () => {
+    try {
+      console.log(config, "af");
+      const softPercent = await readContract(config, {
+        abi : CONTRACT_ABI_HARD,
+        address: CONTRACT_ADDRESS_HARD as Address,
+        functionName: "IMMEDIATE_WITHDRAWAL_FEE",
+      });
+      console.log(softPercent, "SADAAAAAAAAAAAAAA")
+      return softPercent;
+    } catch (error) {
+      console.log("EEEEEEEEEEEEE", error);
+    }
+  }
+
+  export const getSoftUnlock = async () => {
+    try {
+      console.log(config, "af");
+      const softPercent = await readContract(config, {
+        abi : CONTRACT_ABI_ARY,
+        address: CONTRACT_ADDRESS as Address,
+        functionName: "lockDuration",
+      });
+      console.log(softPercent, "SADAAAAAAAAAAAAAA")
+      return softPercent;
+    } catch (error) {
+      console.log("EEEEEEEEEEEEE", error);
+    }
   }
 
   export const getRewardRemain = async () => {
