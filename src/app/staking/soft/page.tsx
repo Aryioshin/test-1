@@ -40,6 +40,7 @@ export default function Page() {
   const chainId = useChainId();
   const { chains, switchChain, error } = useSwitchChain();
   const [tooltipFlg, setToolTipFlg] = useState(0);
+  const [totalBalance, setTotalBalance] = useState(0);
 
   const switchChainHandle = async () => {
     switchChain({ chainId: cronos.id });
@@ -55,6 +56,17 @@ export default function Page() {
       setYourValue(user_amount);
       setRewardRemainValue(user_reward);
       console.log("aaaaaaaaaaaa" + res);
+
+      const balance: any = await getTokenBalance(
+        config,
+        address as Address,
+        chainId,
+        2
+      );
+      const test: any = balance
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      setTotalBalance(test);
     };
     if (address && config) {
       load();
@@ -169,6 +181,18 @@ export default function Page() {
 
         {!(chainId != cronos.id && chainId != cronosTestnet.id) ? (
           <div className="">
+            <div className="flex justify-between w-[100%]">
+              <div className="flex flex-col w-[45%] place-items-end justify-center px-2 py-8">
+                <h1 className="text-orange-00 text-4xl text-center ">
+                  Balance
+                </h1>
+              </div>
+              <div className="flex flex-col w-[45%] place-items-start justify-center">
+                <h1 className="text-orange-00 text-3xl text-center items-center my-6 animate-pulse drop-shadow-lg">
+                  {totalBalance}
+                </h1>
+              </div>
+            </div>
             <div className="flex flex-row">
               <YourLockedValue value={yourValue} />
             </div>
