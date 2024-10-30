@@ -79,7 +79,8 @@ export default function Page() {
       setYourValue(res[0]);
       setRewardRemainValue(res[1].toString());
       const maxDepo: any = await getUserVolumeHard(config, address as Address);
-      setMaxDeposit(maxDepo);
+      const r = parseFloat(maxDepo).toFixed(2);
+      setMaxDeposit(r);
       // console.log("aaaaaaaaaaaa" + res);
     };
     if (address && config) {
@@ -105,6 +106,18 @@ export default function Page() {
     console.log("chchchch:" + value);
   };
 
+  const formatNumbertoLetter = (n: any) => {
+    const num = parseFloat(n.toString().replace(/,/g, ""));
+    const oneK = 100000,
+      oneM = 1000 * oneK;
+    console.log("FormatF", num / oneK, oneM);
+    if (num < 100000000) return num;
+    if (num < oneM) {
+      return num / oneK + 'K';
+    }
+    return num / oneM + 'M';
+  };
+
   const depositNew = () => {
     console.log("let's deposit");
     try {
@@ -123,7 +136,7 @@ export default function Page() {
     }
   };
 
-  const EmerwithdrawFunc = () => {
+  const EmerWithdrawFunc = () => {
     try {
       const res = Emerwithdraw(config1, CONTRACT_ADDRESS_HARD);
     } catch (error) {
@@ -193,13 +206,13 @@ export default function Page() {
           <div className="">
             <div className="flex justify-between w-[100%]">
               <div className="flex flex-col w-[45%] place-items-end justify-center px-2 py-8">
-                <h1 className="text-orange-00 text-4xl text-center ">
+                <h1 className="text-orange-00 text-2xl text-center ">
                   Balance
                 </h1>
               </div>
               <div className="flex flex-col w-[45%] place-items-start justify-center">
-                <h1 className="text-orange-00 text-3xl text-center items-center my-6 animate-pulse drop-shadow-lg">
-                  {totalBalance}
+                <h1 className="text-orange-00 text-2xl text-center items-center my-6 animate-pulse drop-shadow-lg">
+                  {formatNumbertoLetter(totalBalance)}
                 </h1>
               </div>
             </div>
@@ -208,31 +221,31 @@ export default function Page() {
             </div>
             <div className="flex justify-between w-[100%]">
               <div className="flex flex-col w-[45%] place-items-end justify-center px-2 py-8">
-                <h1 className="text-orange-00 text-4xl text-center ">
+                <h1 className="text-orange-00 text-2xl text-center ">
                   Max Deposit
                 </h1>
               </div>
               <div className="flex flex-col w-[45%] place-items-start justify-center">
-                <h1 className="text-orange-00 text-3xl text-center items-center my-6 animate-pulse drop-shadow-lg">
+                <h1 className="text-orange-00 text-2xl text-center items-center my-6 animate-pulse drop-shadow-lg">
                   {maxDeposit}
                 </h1>
               </div>
             </div>
             <div className="flex justify-between items-center">
               <div className="flex w-[45%] place-items-end justify-end">
-                <h1 className="text-orange-00 text-4xl text-center w-[129px] mt-[15px]">
+                <h1 className="text-orange-00 text-2xl text-center w-[129px] mt-[15px]">
                   Input
                 </h1>
                 <button
                   onClick={selectMax}
-                  className="border border-2 border-orange-200 text-orange-00 h-8 mt-8 text-[15px] text-white px-2  hover:cursor-pointer"
+                  className="border border-2 border-orange-200 text-orange-00 h-8 mt-8 text-[11px] text-white px-2  hover:cursor-pointer"
                 >
                   MAX
                 </button>
               </div>
               <div className="w-[45%] place-items-start justify-center">
                 <input
-                  className="bg-transparent w-[80%] text-left focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-5xl text-center px-3 h-12 z-20 text-orange-00"
+                  className="bg-transparent w-[80%] text-left focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-2xl text-center px-3 h-12 z-20 text-orange-00"
                   placeholder="0"
                   value={showAmount ? showAmount : ""}
                   // disabled={disabled}
@@ -291,6 +304,20 @@ export default function Page() {
                   className="relative text-2xl font-medium text-orange-00 text-center z-10"
                 >
                   Withdraw
+                </div>
+              </button>
+              <button
+                onClick={() => {
+                  console.log("soft-all claimed!!!");
+                }}
+                type="button"
+                className="flex justify-center items-center  w-full mt-4 py-3 bg-green-1 rounded-xl hover:shadow-button hover:shadow-blue-400 tracking-widest"
+              >
+                <div
+                  onClick={EmerWithdrawFunc}
+                  className="relative text-2xl font-medium text-orange-00 text-center z-10"
+                >
+                  Emergency Withdraw
                 </div>
               </button>
               {/* 

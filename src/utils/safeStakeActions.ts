@@ -252,7 +252,7 @@ export const getUserInfo = async (config: Config, owner: Address) => {
           return false
         });
       console.log(res)
-      window.location.reload();
+      // window.location.reload();
       toast.success("deposit success");
 
       return res
@@ -400,9 +400,9 @@ export const getUserInfo = async (config: Config, owner: Address) => {
     
     try {
       const res = await writeContract(config, {
-        abi : CONTRACT_ABI_ARY,
-        address: CONTRACT_ADDRESS as Address,
-        functionName: 'emergencyWithdraw',
+        abi : CONTRACT_ABI_HARD,
+        address: CONTRACT_ADDRESS_HARD as Address,
+        functionName: 'immediateWithdraw',
         args: [],
       }).then(async (hash) => {
         console.log("Tx:", hash);

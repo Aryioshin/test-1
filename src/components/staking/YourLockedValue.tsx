@@ -11,10 +11,10 @@ export default function YourLockedValue(props: any) {
   return (
     <div className="flex justify-between w-[100%]">
       <div className="flex flex-col w-[45%] place-items-end justify-center px-2 py-8">
-        <h1 className="text-orange-00 text-4xl text-center ">Value</h1>
+        <h1 className="text-orange-00 text-2xl text-center ">Value</h1>
       </div>
       <div className="flex flex-col w-[45%] place-items-start justify-center">
-        <h1 className="text-orange-00 text-3xl text-center items-center my-6 animate-pulse drop-shadow-lg">
+        <h1 className="text-orange-00 text-2xl text-center items-center my-6 animate-pulse drop-shadow-lg">
           {test}
         </h1>
       </div>

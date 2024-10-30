@@ -183,12 +183,12 @@ export default function Page() {
           <div className="">
             <div className="flex justify-between w-[100%]">
               <div className="flex flex-col w-[45%] place-items-end justify-center px-2 py-8">
-                <h1 className="text-orange-00 text-4xl text-center ">
+                <h1 className="text-orange-00 text-2xl text-center ">
                   Balance
                 </h1>
               </div>
               <div className="flex flex-col w-[45%] place-items-start justify-center">
-                <h1 className="text-orange-00 text-3xl text-center items-center my-6 animate-pulse drop-shadow-lg">
+                <h1 className="text-orange-00 text-2xl text-center items-center my-6 animate-pulse drop-shadow-lg">
                   {totalBalance}
                 </h1>
               </div>
@@ -197,17 +197,17 @@ export default function Page() {
               <YourLockedValue value={yourValue} />
             </div>
             <div className="flex justify-center items-center">
-              <h1 className="text-orange-00 text-4xl text-center w-[129px] mt-[15px]">
+              <h1 className="text-orange-00 text-2xl text-center w-[129px] mt-[15px]">
                 Input
               </h1>
               <button
                 onClick={selectMax}
-                className="border border-2 border-orange-200 text-orange-00 h-8 mt-8 text-[15px] text-white px-2  hover:cursor-pointer"
+                className="border border-2 border-orange-200 text-orange-00 h-8 mt-8 text-[11px] text-white px-2  hover:cursor-pointer"
               >
                 MAX
               </button>
               <input
-                className="bg-transparent w-[80px] text-right focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-5xl text-center px-3 h-12 z-20 text-orange-00"
+                className="bg-transparent w-[80px] text-right focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-2xl text-center px-3 h-12 z-20 text-orange-00"
                 placeholder="0"
                 value={showAmount ? showAmount : ""}
                 // disabled={disabled}
