@@ -79,6 +79,20 @@ export const getUserInfo = async (config: Config, owner: Address) => {
     }
   }
 
+  export const getUserVolumeHard = async (config: Config, owner: Address) => {
+    const res = await readContract(config, {
+      abi : CONTRACT_ABI_HARD,
+      address: CONTRACT_ADDRESS_HARD as Address,
+      functionName: "getUserVolume",
+      args: [owner],
+    });
+    return convertBignitTofloat(res, 18) / 100;
+  }
+
+  export const convertBignitTofloat = (value: any, decimal: number) => {
+    return parseFloat((Number(value) / Math.pow(10, decimal)).toFixed(3))
+  }
+
   export const getHardUnlock = async () => {
     try {
       console.log(config, "af");

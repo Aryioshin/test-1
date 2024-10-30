@@ -12,8 +12,19 @@ import { useAccount, useConfig } from "wagmi";
 import { swapTokens, getQuote } from "@/utils/actions";
 import { toast } from "react-toastify";
 import { readContract, writeContract } from "@wagmi/core";
-import { CONTRACT_ADDRESS, CONTRACT_ADDRESS_HARD } from "@/config/safeStakeConfig";
-import { getUserInfo, getRewardRemain, getUserInfoHard, claimRewardsHard, withdrawHard, depositHard } from "@/utils/safeStakeActions";
+import {
+  CONTRACT_ADDRESS,
+  CONTRACT_ADDRESS_HARD,
+} from "@/config/safeStakeConfig";
+import {
+  getUserInfo,
+  getRewardRemain,
+  getUserInfoHard,
+  claimRewardsHard,
+  withdrawHard,
+  depositHard,
+  getUserVolumeHard,
+} from "@/utils/safeStakeActions";
 import { deposit } from "@/utils/safeStakeActions";
 import { Address } from "viem";
 import { CloudCog } from "lucide-react";
@@ -25,6 +36,7 @@ import Image from "next/image";
 import { useSwitchChain, useChainId } from "wagmi";
 import { base, cronos, cronosTestnet, mainnet } from "viem/chains";
 import { getTokenBalance } from "@/utils/actions";
+import { formatEther } from "viem";
 
 export default function Page() {
   const router = useRouter();
@@ -40,6 +52,7 @@ export default function Page() {
   const chainId = useChainId();
   const { chains, switchChain, error } = useSwitchChain();
   const [tooltipFlg, setToolTipFlg] = useState(0);
+  const [totalBalance, setTotalBalance] = useState(0);
 
   const switchChainHandle = async () => {
     switchChain({ chainId: cronos.id });
@@ -52,6 +65,14 @@ export default function Page() {
       const res: any = await getUserInfoHard(config, address as Address);
       // let [user_amount, user_reward] = res.toString().split(",");
       console.log("rererererrreer" + res[0] + "a" + res[1]);
+      const balance : any = await getTokenBalance(
+        config,
+        address as Address,
+        chainId,
+        2
+      );
+      const test : any = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      setTotalBalance(test);
       setYourValue(res[0]);
       setRewardRemainValue(res[1].toString());
       // console.log("aaaaaaaaaaaa" + res);
@@ -115,7 +136,7 @@ export default function Page() {
 
   const showRemain = (rewardRemainValue: string) => {
     console.log("reward Remain -> " + rewardRemainValue);
-    if(rewardRemainValue.length < 7) return rewardRemainValue;
+    if (rewardRemainValue.length < 7) return rewardRemainValue;
     const start: any = rewardRemainValue.slice(0, 3); // Get first 3 digits
     const end: any = rewardRemainValue.slice(-3); // Get last 3 digits
     return `${start}...${end}`; // Combine with ellipsis
@@ -123,18 +144,13 @@ export default function Page() {
   };
 
   const selectMax = async () => {
-    const balance = await getTokenBalance(
-      config,
-      address as Address,
-      chainId,
-      2
-    );
+    const balance: any = await getUserVolumeHard(config, address as Address);
     setShowAmount(balance);
     setAmount(balance * Math.pow(10, 18));
   };
 
   const showToolTip = () => {
-    if(tooltipFlg === 0) setToolTipFlg(1);
+    if (tooltipFlg === 0) setToolTipFlg(1);
     else setToolTipFlg(0);
   };
 
@@ -170,26 +186,42 @@ export default function Page() {
 
         {!(chainId != cronos.id && chainId != cronosTestnet.id) ? (
           <div className="">
+            <div className="flex justify-between w-[100%]">
+              <div className="flex flex-col w-[45%] place-items-end justify-center px-2 py-8">
+                <h1 className="text-orange-00 text-4xl text-center ">
+                  Balance
+                </h1>
+              </div>
+              <div className="flex flex-col w-[45%] place-items-start justify-center">
+                <h1 className="text-orange-00 text-3xl text-center items-center my-6 animate-pulse drop-shadow-lg">
+                  {totalBalance}
+                </h1>
+              </div>
+            </div>
             <div className="flex flex-row">
               <YourLockedValue value={yourValue} />
             </div>
-            <div className="flex justify-center items-center">
-              <h1 className="text-orange-00 text-4xl text-center w-[129px] mt-[15px]">
-                Input
-              </h1>
-              <button
-                onClick={selectMax}
-                className="bg-primary-gray-300 h-8 mt-8 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
-              >
-                100%
-              </button>
-              <input
-                className="bg-transparent w-[80px] text-right focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-5xl text-center px-3 h-12 z-20 text-orange-00"
-                placeholder="0"
-                value={showAmount ? showAmount : ""}
-                // disabled={disabled}
-                onChange={handleAmountChange}
-              />
+            <div className="flex justify-between items-center">
+              <div className="flex w-[45%] place-items-end justify-end">
+                <h1 className="text-orange-00 text-4xl text-center w-[129px] mt-[15px]">
+                  Input
+                </h1>
+                <button
+                  onClick={selectMax}
+                  className="border border-2 border-orange-200 text-orange-00 h-8 mt-8 text-[15px] text-white px-2  hover:cursor-pointer"
+                >
+                  MAX
+                </button>
+              </div>
+              <div className="w-[45%] place-items-start justify-center">
+                <input
+                  className="bg-transparent w-[80%] text-left focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-5xl text-center px-3 h-12 z-20 text-orange-00"
+                  placeholder="0"
+                  value={showAmount ? showAmount : ""}
+                  // disabled={disabled}
+                  onChange={handleAmountChange}
+                />
+              </div>
             </div>
             <div
               onClick={depositNew}
@@ -214,7 +246,7 @@ export default function Page() {
                 </div>
                 <button
                   onClick={showToolTip}
-                  className="bg-primary-gray-300 h-5 mt-2 ml-2 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
+                  className="border border-2 border-orange-200 text-orange-00 h-8 ml-3 text-[15px] text-white px-2  hover:cursor-pointer"
                 >
                   ...
                 </button>

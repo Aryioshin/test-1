@@ -178,9 +178,9 @@ export default function Page() {
               </h1>
               <button
                 onClick={selectMax}
-                className="bg-primary-gray-300 h-8 mt-8 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
+                className="border border-2 border-orange-200 text-orange-00 h-8 mt-8 text-[15px] text-white px-2  hover:cursor-pointer"
               >
-                100%
+                MAX
               </button>
               <input
                 className="bg-transparent w-[80px] text-right focus:outline-2 outline-2 outline-green-1 font-bold mt-5 mx-10 text-5xl text-center px-3 h-12 z-20 text-orange-00"
@@ -213,7 +213,7 @@ export default function Page() {
                 </div>
                 <button
                   onClick={showToolTip}
-                  className="bg-primary-gray-300 h-5 mt-2 ml-2 text-xs text-white px-2 rounded-md hover:cursor-pointer hover:shadow-blue-400 hover:text-blue-400 hover:shadow-button hover:bg-primary-gray-300/80"
+                  className="border border-2 border-orange-200 text-orange-00 h-8 ml-3 text-[15px] text-white px-2  hover:cursor-pointer"
                 >
                   ...
                 </button>
