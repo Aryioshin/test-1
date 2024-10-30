@@ -12,8 +12,8 @@ import { useAccount, useConfig } from "wagmi";
 import { swapTokens, getQuote } from "@/utils/actions";
 import { toast } from "react-toastify";
 import { readContract, writeContract } from "@wagmi/core";
-import { CONTRACT_ADDRESS } from "@/config/safeStakeConfig";
-import { getUserInfo, getRewardRemain } from "@/utils/safeStakeActions";
+import { CONTRACT_ADDRESS, CONTRACT_ADDRESS_HARD } from "@/config/safeStakeConfig";
+import { getUserInfo, getRewardRemain, getUserInfoHard, claimRewardsHard, withdrawHard, depositHard } from "@/utils/safeStakeActions";
 import { deposit } from "@/utils/safeStakeActions";
 import { Address } from "viem";
 import { CloudCog } from "lucide-react";
@@ -49,12 +49,12 @@ export default function Page() {
 
   useEffect(() => {
     const load = async () => {
-      const res: any = await getUserInfo(config, address as Address);
-      let [user_amount, user_reward] = res.toString().split(",");
-      console.log("rererererrreer" + user_amount + "a" + user_reward);
-      setYourValue(user_amount);
-      setRewardRemainValue(user_reward);
-      console.log("aaaaaaaaaaaa" + res);
+      const res: any = await getUserInfoHard(config, address as Address);
+      // let [user_amount, user_reward] = res.toString().split(",");
+      console.log("rererererrreer" + res[0] + "a" + res[1]);
+      setYourValue(res[0]);
+      setRewardRemainValue(res[1].toString());
+      // console.log("aaaaaaaaaaaa" + res);
     };
     if (address && config) {
       load();
@@ -82,7 +82,7 @@ export default function Page() {
   const depositNew = () => {
     console.log("let's deposit");
     try {
-      const res = deposit(config1, amount, CONTRACT_ADDRESS);
+      const res = depositHard(config1, amount, CONTRACT_ADDRESS_HARD);
       console.log(amount, "mamamamam");
     } catch (error) {
       console.log("deposit Error!" + error);
@@ -91,7 +91,7 @@ export default function Page() {
 
   const withdrawFunc = () => {
     try {
-      const res = withdraw(config1, CONTRACT_ADDRESS);
+      const res = withdrawHard(config1, CONTRACT_ADDRESS_HARD);
     } catch (error) {
       console.log("withdrawErr:", error);
     }
@@ -99,7 +99,7 @@ export default function Page() {
 
   const EmerwithdrawFunc = () => {
     try {
-      const res = Emerwithdraw(config1, CONTRACT_ADDRESS);
+      const res = Emerwithdraw(config1, CONTRACT_ADDRESS_HARD);
     } catch (error) {
       console.log("withdrawErr:", error);
     }
@@ -107,7 +107,7 @@ export default function Page() {
 
   const allClaim = () => {
     try {
-      const res = claimRewards(config1);
+      const res = claimRewardsHard(config1);
     } catch (error) {
       console.log("allClaim Err:", error);
     }
@@ -115,6 +115,7 @@ export default function Page() {
 
   const showRemain = (rewardRemainValue: string) => {
     console.log("reward Remain -> " + rewardRemainValue);
+    if(rewardRemainValue.length < 7) return rewardRemainValue;
     const start: any = rewardRemainValue.slice(0, 3); // Get first 3 digits
     const end: any = rewardRemainValue.slice(-3); // Get last 3 digits
     return `${start}...${end}`; // Combine with ellipsis

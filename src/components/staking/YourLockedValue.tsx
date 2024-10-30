@@ -4,7 +4,7 @@ import { formatEther } from "viem";
 export default function YourLockedValue(props: any) {
   const { value } = props;
 
-  const valueInt = parseFloat(formatEther(value)).toFixed(0);
+  const valueInt = parseFloat(formatEther(value)).toFixed(2);
 
   const test = valueInt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
