@@ -53,6 +53,7 @@ export default function Page() {
   const { chains, switchChain, error } = useSwitchChain();
   const [tooltipFlg, setToolTipFlg] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
+  const [maxDeposit, setMaxDeposit] = useState(0);
 
   const switchChainHandle = async () => {
     switchChain({ chainId: cronos.id });
@@ -65,16 +66,20 @@ export default function Page() {
       const res: any = await getUserInfoHard(config, address as Address);
       // let [user_amount, user_reward] = res.toString().split(",");
       console.log("rererererrreer" + res[0] + "a" + res[1]);
-      const balance : any = await getTokenBalance(
+      const balance: any = await getTokenBalance(
         config,
         address as Address,
         chainId,
         2
       );
-      const test : any = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      const test: any = balance
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       setTotalBalance(test);
       setYourValue(res[0]);
       setRewardRemainValue(res[1].toString());
+      const maxDepo: any = await getUserVolumeHard(config, address as Address);
+      setMaxDeposit(maxDepo);
       // console.log("aaaaaaaaaaaa" + res);
     };
     if (address && config) {
@@ -144,7 +149,7 @@ export default function Page() {
   };
 
   const selectMax = async () => {
-    const balance: any = await getUserVolumeHard(config, address as Address);
+    const balance: any = maxDeposit;
     setShowAmount(balance);
     setAmount(balance * Math.pow(10, 18));
   };
@@ -200,6 +205,18 @@ export default function Page() {
             </div>
             <div className="flex flex-row">
               <YourLockedValue value={yourValue} />
+            </div>
+            <div className="flex justify-between w-[100%]">
+              <div className="flex flex-col w-[45%] place-items-end justify-center px-2 py-8">
+                <h1 className="text-orange-00 text-4xl text-center ">
+                  Max Deposit
+                </h1>
+              </div>
+              <div className="flex flex-col w-[45%] place-items-start justify-center">
+                <h1 className="text-orange-00 text-3xl text-center items-center my-6 animate-pulse drop-shadow-lg">
+                  {maxDeposit}
+                </h1>
+              </div>
             </div>
             <div className="flex justify-between items-center">
               <div className="flex w-[45%] place-items-end justify-end">
