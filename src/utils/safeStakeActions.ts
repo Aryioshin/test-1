@@ -427,3 +427,12 @@ export const getUserInfo = async (config: Config, owner: Address) => {
       return false
     }
   }
+
+  export const convertBignitToString = (eth: any) => {
+    // const eth: any = Number(num) / 10 ** 18;
+    const head = eth.toString().split(".")[0];
+    if (head.length > 9) return head.slice(0, head.length - 9) + "B";
+    if (head.length > 6) return head.slice(0, head.length - 6) + "M";
+    if (head.length > 3) return head.slice(0, head.length - 3) + "K";
+    return eth.toFixed(3)
+  }

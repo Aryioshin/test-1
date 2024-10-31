@@ -24,6 +24,7 @@ import {
   withdrawHard,
   depositHard,
   getUserVolumeHard,
+  convertBignitToString
 } from "@/utils/safeStakeActions";
 import { deposit } from "@/utils/safeStakeActions";
 import { Address } from "viem";
@@ -79,7 +80,7 @@ export default function Page() {
       setYourValue(res[0]);
       setRewardRemainValue(res[1].toString());
       const maxDepo: any = await getUserVolumeHard(config, address as Address);
-      const r = parseFloat(maxDepo).toFixed(2);
+      const r : any = parseFloat(maxDepo).toFixed(2);
       setMaxDeposit(r);
       // console.log("aaaaaaaaaaaa" + res);
     };
@@ -173,7 +174,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-[100vh] text-green-200 pt-[100px]">
+    <div className="flex justify-center items-center w-full h-[100vh] text-green-200 pt-[200px]">
       <div className="relative w-[calc(100%-10px)] md:w-[700px] bg-green-950/80 px-5 pt-10 pb-4 mx-4 shadow-3xl shadow-green-600/70 rounded-3xl backdrop-blur-sm">
         <div className="flex justify-between items-baseline mb-4 px-8">
           <div
@@ -212,7 +213,7 @@ export default function Page() {
               </div>
               <div className="flex flex-col w-[45%] place-items-start justify-center">
                 <h1 className="text-orange-00 text-2xl text-center items-center my-6 animate-pulse drop-shadow-lg">
-                  {formatNumbertoLetter(totalBalance)}
+                  {convertBignitToString(totalBalance)}
                 </h1>
               </div>
             </div>
@@ -227,7 +228,7 @@ export default function Page() {
               </div>
               <div className="flex flex-col w-[45%] place-items-start justify-center">
                 <h1 className="text-orange-00 text-2xl text-center items-center my-6 animate-pulse drop-shadow-lg">
-                  {maxDeposit}
+                  {convertBignitToString(maxDeposit)}
                 </h1>
               </div>
             </div>

@@ -13,7 +13,7 @@ import { swapTokens, getQuote } from "@/utils/actions";
 import { toast } from "react-toastify";
 import { readContract, writeContract } from "@wagmi/core";
 import { CONTRACT_ADDRESS } from "@/config/safeStakeConfig";
-import { getUserInfo, getRewardRemain } from "@/utils/safeStakeActions";
+import { getUserInfo, getRewardRemain, convertBignitToString } from "@/utils/safeStakeActions";
 import { deposit } from "@/utils/safeStakeActions";
 import { Address } from "viem";
 import { CloudCog } from "lucide-react";
@@ -189,7 +189,7 @@ export default function Page() {
               </div>
               <div className="flex flex-col w-[45%] place-items-start justify-center">
                 <h1 className="text-orange-00 text-2xl text-center items-center my-6 animate-pulse drop-shadow-lg">
-                  {totalBalance}
+                  {convertBignitToString(totalBalance)}
                 </h1>
               </div>
             </div>
