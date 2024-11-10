@@ -10,7 +10,7 @@ import { IVolume } from "@/utils/actions";
 import { useRouter } from "next/navigation";
 import { CONTRACT_ADDRESS } from "@/config/safeStakeConfig";
 import { useAccount, useConfig } from "wagmi";
-import { getHardRate, getHardUnlock, getImmeFee, getSoftUnlock, getTotalStaked } from "@/utils/safeStakeActions";
+import { getHardRate, getHardTotalStaked, getHardUnlock, getImmeFee, getSoftUnlock, getTotalStaked } from "@/utils/safeStakeActions";
 import { getSoftAPR } from "@/utils/safeStakeActions";
 import { CONTRACT_ADDRESS_HARD } from "@/config/safeStakeConfig";
 
@@ -29,8 +29,9 @@ export default function Page() {
     const load = async () => {
       try {
         const res: any = await getTotalStaked();
-        console.log(res, "============>")
-        setTotalValue(res);
+        const res_hard: any = await getHardTotalStaked();
+        console.log(res, res_hard, "============>")
+        setTotalValue(res + res_hard);
       } catch (error) {
         console.error("Error fetching total staked", error);
       }

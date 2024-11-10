@@ -49,6 +49,22 @@ export const getUserInfo = async (config: Config, owner: Address) => {
     
   }
 
+  export const getHardTotalStaked = async () => {
+    try {
+      console.log(config, "AAAAAAAAAAAAAAAA");
+      const totalStaked = await readContract(config, {
+        abi : CONTRACT_ABI_HARD,
+        address: CONTRACT_ADDRESS_HARD as Address,
+        functionName: "getTotalStaked",
+      });
+      console.log(totalStaked, "SADAAAAAAAAAAAAAA")
+      return totalStaked;
+    } catch (error) {
+      console.log("EEEEEEEEEEEEE", error);
+    }
+    
+  }
+
   export const getSoftAPR = async () => {
     try {
       console.log(config, "af");
