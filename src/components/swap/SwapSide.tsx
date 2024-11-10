@@ -56,13 +56,16 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, o
   };
 
   const select25 = () => {
-    setAmount(balance/4)
+    const a = (balance / 4).toFixed(1);
+    setAmount(a)
   }
   const select50 = () => {
-    setAmount(balance/2)
+    const a = (balance / 2).toFixed(1);
+    setAmount(a)
   }
   const selectMax = () => {
-    setAmount(balance * 0.9999)
+    const a = (balance * 0.9999).toFixed(1);
+    setAmount(a)
   }
 
   return (
