@@ -70,7 +70,7 @@ export const getUserInfo = async (config: Config, owner: Address) => {
       const softPercent = await readContract(config, {
         abi : CONTRACT_ABI_HARD,
         address: CONTRACT_ADDRESS_HARD as Address,
-        functionName: "REWARD_RATE",
+        functionName: "FEE_PERCENTAGE",
       });
       console.log(softPercent, "SADAAAAAAAAAAAAAA")
       return softPercent;
@@ -114,7 +114,7 @@ export const getUserInfo = async (config: Config, owner: Address) => {
       const softPercent = await readContract(config, {
         abi : CONTRACT_ABI_HARD,
         address: CONTRACT_ADDRESS_HARD as Address,
-        functionName: "IMMEDIATE_WITHDRAWAL_FEE",
+        functionName: "IMMEDIATE_WITHDRAWAL_FEE_PERCENTAGE",
       });
       console.log(softPercent, "SADAAAAAAAAAAAAAA")
       return softPercent;
@@ -434,5 +434,5 @@ export const getUserInfo = async (config: Config, owner: Address) => {
     if (head.length > 9) return head.slice(0, head.length - 9) + "B";
     if (head.length > 6) return head.slice(0, head.length - 6) + "M";
     if (head.length > 3) return head.slice(0, head.length - 3) + "K";
-    return eth.toFixed(3)
+    return eth.toFixed(3);
   }
