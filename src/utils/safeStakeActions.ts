@@ -446,7 +446,9 @@ export const getUserInfo = async (config: Config, owner: Address) => {
 
   export const convertBignitToString = (eth: any) => {
     // const eth: any = Number(num) / 10 ** 18;
+    if(eth == 0) return 0;
     const head = eth.toString().split(".")[0];
+    console.log(head, "^^^^^^^^^^");
     if (head.length > 9) return head.slice(0, head.length - 9) + "B";
     if (head.length > 6) return head.slice(0, head.length - 6) + "M";
     if (head.length > 3) return head.slice(0, head.length - 3) + "K";

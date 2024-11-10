@@ -1,5 +1,6 @@
 "use client";
 
+import { convertBignitToString } from "@/utils/safeStakeActions";
 import { formatGwei, parseEther, parseGwei } from "viem";
 import { formatEther } from 'viem';
 
@@ -8,7 +9,9 @@ export default function TotalLockedValue(props: any) {
 
   const valueInt = parseFloat(formatEther(value)).toFixed(0);
 
-  const test = valueInt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  // const test1 : any = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  // console.log(test1, "$%$%$%$%$");
+  const test = convertBignitToString(valueInt);
 
 
   return (

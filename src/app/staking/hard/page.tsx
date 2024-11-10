@@ -163,7 +163,7 @@ export default function Page() {
   };
 
   const selectMax = async () => {
-    const balance: any = maxDeposit * 0.999;
+    const balance: any = maxDeposit * 0.9999;
     setShowAmount(balance);
     setAmount(balance * Math.pow(10, 18));
   };

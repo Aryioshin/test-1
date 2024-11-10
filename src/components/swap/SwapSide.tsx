@@ -62,7 +62,7 @@ export default function SwapSide({ className = "", disabled = false, coin = 0, o
     setAmount(balance/2)
   }
   const selectMax = () => {
-    setAmount(balance)
+    setAmount(balance * 0.9999)
   }
 
   return (

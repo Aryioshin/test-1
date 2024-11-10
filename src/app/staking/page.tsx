@@ -30,8 +30,9 @@ export default function Page() {
       try {
         const res: any = await getTotalStaked();
         const res_hard: any = await getHardTotalStaked();
-        console.log(res, res_hard, "============>")
-        setTotalValue(res + res_hard);
+        console.log(res+res_hard, "============>");
+        const totalRes = res + res_hard;
+        setTotalValue(totalRes);
       } catch (error) {
         console.error("Error fetching total staked", error);
       }
