@@ -139,7 +139,7 @@ export default function Page() {
       address as Address,
       chainId,
       2
-    );
+    ) * 0.9999;
     setShowAmount(balance);
     setAmount(balance * Math.pow(10, 18));
   };
