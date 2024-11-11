@@ -50,7 +50,7 @@ export const nativeCoinId = 0
 export const nativeCoin = TOKEN_LIST[nativeCoinId]
 export const currentChain = cronos;
 
-export const fee = 0.3; // 100
+export const fee = 0.3; // 100.
 
 export const cronosConfig = {
   chainId: 25,
