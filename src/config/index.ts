@@ -40,7 +40,8 @@ export const VVS2Router = "0x145863Eb42Cf62847A6Ca784e6416C1682b1b2Ae"
 // export const CONTRACT_ADDRESS = "0xfb34116ed889ae6487e1abe872b9e87ce70240ad" //will be change
 // export const CONTRACT_ADDRESS = "0xc98DF1C5E808789001103fE641e1770714fF2639" //will be change
 // export const CONTRACT_ADDRESS = "0x1950d273589DBf9A3d15EED4aD3c26DB819E3FE0" //will be change
-export const CONTRACT_ADDRESS = "0x694f512adf29d61b7aea1d282a670a5e2bef5b31" //will be change
+// export const CONTRACT_ADDRESS = "0x694f512adf29d61b7aea1d282a670a5e2bef5b31" //will be change
+export const CONTRACT_ADDRESS = "0xd59c64b327DB1013c7c325876d4772df258413Fe" //will be change
 
 export const FACTORY = "0x3B44B2a187a7b3824131F8db5a74194D0a42Fc15";
 // export const FACTORY = "0x7E0987E5b3a30e3f2828572Bb659A548460a3003";

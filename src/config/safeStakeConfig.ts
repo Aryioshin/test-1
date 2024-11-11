@@ -34,7 +34,8 @@ export const VVS2Router = "0x145863Eb42Cf62847A6Ca784e6416C1682b1b2Ae"
 
 export const CONTRACT_ADDRESS = "0xFf294133718eE45743deC42401141e1eE2047ab6" // soft stake
 // export const CONTRACT_ADDRESS_HARD = "0x55ffb3e8e9E2264B8F4C5975270a926A91381c7c" // hard stake
-export const CONTRACT_ADDRESS_HARD = "0x1a7bb20c072dcd616b9a33daea5e33bcabbaab31" // hard stake
+// export const CONTRACT_ADDRESS_HARD = "0x1a7bb20c072dcd616b9a33daea5e33bcabbaab31" // hard stake
+export const CONTRACT_ADDRESS_HARD = "0x50663E8322C1A2ede3449795c4d674a30b8Ef661" // hard stake
 
 export const FACTORY = "0x3B44B2a187a7b3824131F8db5a74194D0a42Fc15";
 
