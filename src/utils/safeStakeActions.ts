@@ -268,7 +268,7 @@ export const getUserInfo = async (config: Config, owner: Address) => {
           return false
         });
       console.log(res)
-      // window.location.reload();
+      window.location.reload();
       toast.success("deposit success");
 
       return res

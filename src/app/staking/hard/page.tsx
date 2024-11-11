@@ -79,8 +79,12 @@ export default function Page() {
       setTotalBalance(test);
       setYourValue(res[0]);
       setRewardRemainValue(res[1].toString());
-      const maxDepo: any = await getUserVolumeHard(config, address as Address);
-      const r : any = parseFloat(maxDepo);
+      let maxDepo: any = await getUserVolumeHard(config, address as Address);
+      let r : any = parseFloat(maxDepo);
+      console.log(r, "rrrrrrrrrrrrr");
+      const r1 : any = parseFloat(formatEther(res[0]));
+      console.log(r1, "resresres");
+      if(r1 > 0) r -= r1;
       setMaxDeposit(r);
       // console.log("aaaaaaaaaaaa" + res);
     };
@@ -163,7 +167,7 @@ export default function Page() {
   };
 
   const selectMax = async () => {
-    const balance: any = maxDeposit * 0.9999;
+    const balance: any = (maxDeposit * 0.9999).toFixed(3);
     setShowAmount(balance);
     setAmount(balance * Math.pow(10, 18));
   };
