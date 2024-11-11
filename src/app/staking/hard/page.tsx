@@ -279,12 +279,12 @@ export default function Page() {
                 >
                   Claim ( {showRemain(rewardRemainValue)} )
                 </div>
-                <button
+                <p
                   onClick={showToolTip}
                   className="border border-2 border-orange-200 text-orange-00 h-6 ml-3 text-[11px] text-white px-2 -pt-2 hover:cursor-pointer"
                 >
                   ...
-                </button>
+                </p>
 
                 {tooltipFlg === 1 ? (
                   <div className="tooltip absolute bg-gray-700 text-white text-lg rounded-lg p-2 whitespace-nowrap left-1/2 transform -translate-x-1/2 -translate-y-full">
