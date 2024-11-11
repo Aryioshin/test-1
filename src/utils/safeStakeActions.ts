@@ -255,8 +255,8 @@ export const getUserInfo = async (config: Config, owner: Address) => {
         args: [amount],
         value: payableCro
       }).then(async (hash) => {
-        console.log("Approve Tx:", hash);
-        toast.warning('Please wait');
+        console.log("Approve  Tx:", hash);
+        toast.warning('Please wait!');
         await waitForTransactionReceipt(config, {
           hash,
         });

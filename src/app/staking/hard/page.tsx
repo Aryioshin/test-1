@@ -167,7 +167,12 @@ export default function Page() {
   };
 
   const selectMax = async () => {
+<<<<<<< HEAD
     const balance: any = (maxDeposit * 0.9999).toFixed(3);
+=======
+    const availableToStake = Math.max(0, maxDeposit - YourLockedValue);
+    const balance: any = availableToStake * 0.9999;
+>>>>>>> c1b226213b8d94bba766a1f88a6488e0b250a729
     setShowAmount(balance);
     setAmount(balance * Math.pow(10, 18));
   };
