@@ -34,7 +34,7 @@ export default function Page() {
         const totalRes = res + res_hard;
         setTotalValue(totalRes);
       } catch (error) {
-        console.error("Error fetching total staked", error);
+        console.log("Error fetching total staked", error);
       }
     };
     load();
@@ -60,7 +60,7 @@ export default function Page() {
         setImmeFee(rr);
         console.log(" ", res_3);
       } catch (error) {
-        console.error("Error fetching total staked", error);
+        console.log("Error fetching total staked", error);
       }
     };
     load();

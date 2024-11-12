@@ -5,6 +5,7 @@ import CopyButton from "@/components/CopyBotton"
 
 export default function UserVolume(props: any) {
   const { userVolume, index } = props
+  if (index + 1 > 5) return; //set MAX display.
   return (
     <div className="flex py-1">
       <div className="w-1/12 text-center text-[18px] text-orange-200 px-1">{index + 1}</div>
