@@ -237,7 +237,7 @@ export default function Page() {
                 </div>
                 <p
                   onClick={showToolTip}
-                  className="border border-2 border-orange-200 text-orange-00 h-8 ml-3 text-[15px] text-white px-2  hover:cursor-pointer"
+                  className="border border-2 border-orange-200 text-orange-00 h-6 ml-3 text-[15px] text-white px-2  hover:cursor-pointer"
                 >
                   ...
                 </p>
