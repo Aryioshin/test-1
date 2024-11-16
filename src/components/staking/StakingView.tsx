@@ -14,7 +14,7 @@ export default function StakigView(props: any) {
   const router = useRouter();
 
   const formatAPR = (val: any) => {
-    return val / 300;
+    return val / 100;
   };
 
   return (
