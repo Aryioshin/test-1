@@ -95,7 +95,7 @@ export default function Page() {
             <StakingView key={index} id={index} percent = {softPercent} />
           ))} */}
             <StakingView id={0} percent = {softPercent} unlock = {softUnlock} imme_fee = {immeFee}/>
-            <StakingView id={2} percent = {30} unlock = {hardUnlock} imme_fee = {immeFee}/>
+            <StakingView id={1} percent = {30} unlock = {hardUnlock} imme_fee = {immeFee}/>
 
           {/* <div className="flex bg-green-700/30 relative rounded-2xl mt-12 mb-8">
             <div className="flex flex-col w-[40%]  px-2 py-5  bg-green-700/30 rounded-2xl">
